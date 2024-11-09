@@ -24,7 +24,7 @@ pip install pipenv
 pipenv shell
 pipenv install
 ```
-- Create local mysql DB with the name 'XXX-MCU' and migration DB
+- Migration
 
 ```bash
 py manage.py makemigrations
