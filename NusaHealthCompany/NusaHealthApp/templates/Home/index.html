@@ -4,21 +4,71 @@
 
 {% block content %}
 
+<!-- Image Slider Start -->
+<section id="image-slider" class="bg-light pt-4 pb-5">
+    <div class="swiper-container overflow-hidden">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="static/NusaHealthApp/images/slider1.jpg" alt="Slide 1">
+                <div class="overlay"></div>
+            </div>
+            <div class="swiper-slide">
+                <img src="static/NusaHealthApp/images/slider2.jpg" alt="Slide 2">
+                <div class="overlay"></div>
+            </div>
+            <div class="swiper-slide">
+                <img src="static/NusaHealthApp/images/slider3.jpg" alt="Slide 3">
+                <div class="overlay"></div>
+            </div>
+        </div>
+    
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+    
+    <div class="swiper-pagination"></div>
+</section>
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        loop: true,
+        effect: 'slide',
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
+<!-- Image Slider End -->
+
 <!-- Hero start -->
-<section id="hero" class="px-4 pt-4 pb-5">
+<section id="hero" class="py-5">
     <div class="container d-flex flex-column flex-lg-row-reverse justify-content-between align-items-center py-5">
         <div class="col-lg-5">
-            <img src="static/NusaHealthApp/images/hero_pic.jpg" class="d-block mx-auto h-100 w-100 mb-2 rounded-1" alt="NusaHealth" loading="lazy">
+            <img src="static/NusaHealthApp/images/hero_pic.jpg" class="d-block mx-auto h-100 w-100 mb-2 rounded-1"
+                alt="NusaHealth" loading="lazy">
         </div>
         <div class="col-lg-6">
             <h1 class="fw-bold mb-1">Health Care <span class="text-primary">For All</span></h1>
             <p class="lead mb-1 text-secondary"><i>Comprehensive Healthcare Solutions at NusaHealth</i></p>
             <p class="lead mb-1 text-justify">
-                Ensure your well-being and that of your loved ones with our complete range of health services. At NusaHealth, we provide high-quality medical care, a broad selection of trusted medications, and modern clinic facilities. Our experienced medical team and cutting-edge technology are dedicated to delivering optimal health support for prevention, treatment, and wellness. 
+                Ensure your well-being and that of your loved ones with our complete range of health services. At
+                NusaHealth, we provide high-quality medical care, a broad selection of trusted medications, and modern
+                clinic facilities. Our experienced medical team and cutting-edge technology are dedicated to delivering
+                optimal health support for prevention, treatment, and wellness.
             </p>
             <div class="d-grid gap-2 d-md-flex justify-content-between align-items-center">
                 <p class="lead mb-1 text-secondary"><i>“Your Health, Our Priority”</i></p>
-                <a class="btn btn-outline-primary btn-lg fw-bold rounded-0" href="{% url 'about' %}">Read More &raquo;</a>
+                <a class="btn btn-outline-primary btn-lg fw-bold rounded-0" href="{% url 'about' %}">Read More
+                    &raquo;</a>
             </div>
         </div>
     </div>
@@ -28,16 +78,20 @@
 <!-- Sevices start -->
 <section id="services" class="py-5 bg-light">
     <div class="container py-5">
-        <h2 class="text-center fw-bold text-primary">OUR SERVICES</h2>
+        <h1 class="text-center fw-bold text-primary">OUR SERVICES</h1>
         <p class="lead mb-5 text-secondary text-center"><i>Services Our Company Provides</i></p>
         <div class="d-flex flex-wrap justify-content-center gap-5">
             <div class="card rounded shadow border" style="width: 20rem;">
                 <img src="static/NusaHealthApp/images/services1.jpg" class="card-img-top" alt="MCU Registration">
                 <div class="service-overlay"></div>
                 <div class="card-body card-services rounded-bottom bg-light text-dark p-0">
-                    <h5 class="card-title bg-primary p-2 text-light gap-2 fw-bold d-flex align-items-center"> 
+                    <h5 class="card-title bg-primary p-2 text-light gap-2 fw-bold d-flex align-items-center">
                         <span>
-                            <svg class="text-light arrow-services" width="20px" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M9 5l7 7-7 7" /></svg>
+                            <svg class="text-light arrow-services" width="20px" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
                         </span> Title 1
                     </h5>
                     <p class="card-text text-secondary px-3 pb-2 text-truncate-4 text-justify">
@@ -49,9 +103,13 @@
                 <img src="static/NusaHealthApp/images/services2.jpg" class="card-img-top" alt="MCU Activity">
                 <div class="service-overlay"></div>
                 <div class="card-body card-services rounded-bottom bg-light text-dark p-0">
-                    <h5 class="card-title bg-primary p-2 text-light gap-2 fw-bold d-flex align-items-center"> 
+                    <h5 class="card-title bg-primary p-2 text-light gap-2 fw-bold d-flex align-items-center">
                         <span>
-                            <svg class="text-light arrow-services" width="20px" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M9 5l7 7-7 7" /></svg>
+                            <svg class="text-light arrow-services" width="20px" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
                         </span> Title 2
                     </h5>
                     <p class="card-text text-secondary px-3 pb-2 text-truncate-4 text-justify">
@@ -63,13 +121,17 @@
                 <img src="static/NusaHealthApp/images/services3.jpg" class="card-img-top" alt="MCU Certificate">
                 <div class="service-overlay"></div>
                 <div class="card-body card-services rounded-bottom bg-light text-dark p-0">
-                    <h5 class="card-title bg-primary p-2 text-light gap-2 fw-bold d-flex align-items-center"> 
+                    <h5 class="card-title bg-primary p-2 text-light gap-2 fw-bold d-flex align-items-center">
                         <span>
-                            <svg class="text-light arrow-services" width="20px" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M9 5l7 7-7 7" /></svg>
+                            <svg class="text-light arrow-services" width="20px" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
                         </span> Title 3
                     </h5>
                     <p class="card-text text-secondary px-3 pb-2 text-truncate-4 text-justify">
-                        
+
                     </p>
                 </div>
             </div>

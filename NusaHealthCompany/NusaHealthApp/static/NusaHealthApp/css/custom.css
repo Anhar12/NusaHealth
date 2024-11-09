@@ -50,7 +50,7 @@
 
 /* nav start */
 .navbar {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(47,204,255, 1);
     backdrop-filter: blur(5px);
 }
 
@@ -352,6 +352,45 @@ footer a.nav-link:hover {
     background-color: #2FCCFF !important;
     border: #2FCCFF !important;
 } */
+.swiper-container {
+    width: 100%;
+    height: 550px;
+    position: relative;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    color: #2FCCFF;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.swiper-pagination {
+    position: relative;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.swiper-pagination-bullet-active {
+    background: #2FCCFF;
+}
 
 @media only screen and (max-width: 768px) {
     #sidebar-mcu {
