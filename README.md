@@ -34,6 +34,6 @@ py manage.py migrate
 - Run this project
 
 ```bash
-cd XXX
+cd NusaHealthCompany
 py manage.py runserver
 ```
