@@ -5,5 +5,414 @@ Content Management - Nusa Health Company
 {% endblock %}
 
 {% block content %}
+<div class="container pb-3">
+    <div class="w-100 py-3">
+        <h4 class="text-center fw-bold">Web Content Management</h4>
+    </div>
+    <div class="d-flex flex-column gap-2 align-items-center w-100 container">
+        <div class="w-100 bg-white border fw-bold rounded-1 shadow-sm btn-expand-management">
+            <p id="logoManagementBtn" class="d-flex px-5 py-3 gap-3 align-items-center m-0 border-bottom">
+                <i id="logoManagementBtnIcon" class="fa-solid fa-angles-right fs-3" style="transition: transform 0.3s ease-in-out;"></i>
+                Logos Management
+            </p>
+            
+            <div id="logoFormContainer" class="d-none px-5">
+                <form id="logoForm" class="ps-4 ms-3 py-3" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="d-flex flex-wrap justify-content-around mb-4">
+                        <div class="mb-4">
+                            <label for="primaryLogo" class="">Primary Logo</label>
+                            <input type="file" class="form-control" id="primaryLogo" name="primaryLogo" style="max-width: 250px;">
+                            <img id="primaryLogoPreview" class="preview mt-2" style="max-width: 250px; display: none;" />
+                            {% if logo and logo.primary_logo %}
+                                <img id="primaryLogoNow" src="{{ logo.primary_logo.url }}" alt="Primary Logo" class="mt-2 now" style="max-width: 250px;">
+                            {% else %}
+                                <p id="primaryLogoPlaceholder" class="placeholder mt-2 text-muted">No primary logo uploaded</p>
+                            {% endif %}
+                        </div>
+                    
+                        <div class="mb-4">
+                            <label for="secondaryLogo" class="">Secondary Logo</label>
+                            <input type="file" class="form-control" id="secondaryLogo" name="secondaryLogo" style="max-width: 250px;">
+                            <img id="secondaryLogoPreview" class="preview mt-2" style="max-width: 250px; display: none;" />
+                            {% if logo and logo.secondary_logo %}
+                                <img id="secondaryLogoNow" src="{{ logo.secondary_logo.url }}" alt="Secondary Logo" class="mt-2 now" style="max-width: 250px;">
+                            {% else %}
+                                <p id="secondaryLogoPlaceholder" class="placeholder mt-2 text-muted">No secondary logo uploaded</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-3 pt-2">
+                        <button type="submit" class="btn btn-success px-3 fw-semibold">Save</button>
+                        <button id="logoManagementBtnCancel" class="btn btn-danger px-3 fw-semibold">Cancel</button>
+                    </div>
+                </form>                
+            </div>
+        </div>
+        
+        <div class="w-100 bg-white border fw-bold rounded-1 shadow-sm btn-expand-management">
+            <p id="sliderManagementBtn" class="d-flex px-5 py-3 gap-3 align-items-center m-0 border-bottom">
+                <i id="sliderManagementBtnIcon" class="fa-solid fa-angles-right fs-3" style="transition: transform 0.3s ease-in-out;"></i>
+                Images Slider Management
+            </p>
+            
+            <div id="sliderFormContainer" class="d-none px-5">
+                <form id="sliderForm" class="ps-4 ms-3 py-3" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="d-flex flex-wrap justify-content-around mb-4">
+                        <div class="mb-4">
+                            <label for="slider1" class="">Image Slider 1</label>
+                            <input type="file" class="form-control" id="slider1" name="slider1" style="max-width: 250px;">
+                            <img id="slider1Preview" class="preview mt-2" style="max-width: 250px; display: none;" />
+                            {% if slider and slider.image1 %}
+                                <img id="slider1Now" src="{{ slider.image1.url }}" alt="Image Slider" class="now mt-2" style="max-width: 250px;">
+                            {% else %}
+                                <p id="slider1Placeholder" class="placeholder mt-2 text-muted">No image slider uploaded</p>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="slider2" class="">Image Slider 2</label>
+                            <input type="file" class="form-control" id="slider2" name="slider2" style="max-width: 250px;">
+                            <img id="slider2Preview" class="preview mt-2" style="max-width: 250px; display: none;" />
+                            {% if slider and slider.image2 %}
+                                <img id="slider2Now" src="{{ slider.image2.url }}" alt="Image Slider" class="now mt-2" style="max-width: 250px;">
+                            {% else %}
+                                <p id="slider2Placeholder" class="placeholder mt-2 text-muted">No image slider uploaded</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="slider3" class="">Image Slider 3</label>
+                            <input type="file" class="form-control" id="slider3" name="slider3" style="max-width: 250px;">
+                            <img id="slider3Preview" class="preview mt-2" style="max-width: 250px; display: none;" />
+                            {% if slider and slider.image3 %}
+                                <img id="slider3Now" src="{{ slider.image3.url }}" alt="Image Slider" class="now mt-2" style="max-width: 250px;">
+                            {% else %}
+                                <p id="slider3Placeholder" class="placeholder mt-2 text-muted">No image slider uploaded</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="slider4" class="">Image Slider 4</label>
+                            <input type="file" class="form-control" id="slider4" name="slider4" style="max-width: 250px;">
+                            <img id="slider4Preview" class="preview mt-2" style="max-width: 250px; display: none;" />
+                            {% if slider and slider.image4 %}
+                                <img id="slider4Now" src="{{ slider.image4.url }}" alt="Image Slider" class="now mt-2" style="max-width: 250px;">
+                            {% else %}
+                                <p id="slider4Placeholder" class="placeholder mt-2 text-muted">No image slider uploaded</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="slider5" class="">Image Slider 5</label>
+                            <input type="file" class="form-control" id="slider5" name="slider5" style="max-width: 250px;">
+                            <img id="slider5Preview" class="preview mt-2" style="max-width: 250px; display: none;" />
+                            {% if slider and slider.image5 %}
+                                <img id="slider5Now" src="{{ slider.image5.url }}" alt="Image Slider" class="now mt-2" style="max-width: 250px;">
+                            {% else %}
+                                <p id="slider5Placeholder" class="placeholder mt-2 text-muted">No image slider uploaded</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-3 pt-2">
+                        <button type="submit" class="btn btn-success px-3 fw-semibold">Save</button>
+                        <button id="sliderManagementBtnCancel" class="btn btn-danger px-3 fw-semibold">Cancel</button>
+                    </div>
+                </form>                
+            </div>
+        </div>
+
+        <div class="w-100 bg-white border fw-bold rounded-1 shadow-sm btn-expand-management">
+            <p id="heroManagementBtn" class="d-flex px-5 py-3 gap-3 align-items-center m-0 border-bottom">
+                <i id="heroManagementBtnIcon" class="fa-solid fa-angles-right fs-3" style="transition: transform 0.3s ease-in-out;"></i>
+                Hero Section Management
+            </p>
+            
+            <div id="heroFormContainer" class="d-none px-5">
+                <form id="heroForm" class="ps-4 ms-3 py-3" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="d-flex flex-wrap justify-content-around mb-4">
+                        <div class="">
+                            <label for="hero_image" class="">Hero Image</label>
+                            <input type="file" class="form-control" id="hero_image" name="hero_image" style="max-width: 250px;">
+                            <img id="heroPreview" class="preview mt-2" style="max-width: 250px; display: none;" />
+                            {% if hero and hero.hero_image %}
+                                <img id="heroNow" src="{{ hero.hero_image.url }}" alt="Hero Image" class="now mt-2" style="max-width: 250px;">
+                            {% else %}
+                                <p id="heroPlaceholder" class="mt-2 text-muted">No hero image uploaded</p>
+                            {% endif %}
+                        </div>
+                        <div class="w-50">
+                            <label for="heroText" class="">Hero Text</label>
+                            <textarea class="form-control" id="hero_text" name="hero_text" rows="10">
+                                {% if hero and hero.hero_text %}
+                                    {{ hero.hero_text }}
+                                {% endif %}
+                            </textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-3 pt-2">
+                        <button type="submit" class="btn btn-success px-3 fw-semibold">Save</button>
+                        <button id="heroManagementBtnCancel" class="btn btn-danger px-3 fw-semibold">Cancel</button>
+                    </div>
+                </form>                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'loading-spinner.html' %}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#hero_text').val($('#hero_text').val().trim());
+        function buttonEvent(btn, formContainer, formInput) {
+            var formElem = $('#' + formContainer);
+            var iconElem = $('#' + btn + 'Icon');
+            var btnElem = $('#' + btn);
+
+            formElem.addClass('d-none').hide();
+            iconElem.removeClass('rotate-down');
+            btnElem.removeClass('text-primary');
+
+            btnElem.on('click', function() {
+                if (formElem.hasClass('d-none')) {
+                    formElem.removeClass('d-none').stop(true, true).slideDown(300);
+                    iconElem.addClass('rotate-down');
+                    btnElem.addClass('text-primary');
+                } else {
+                    formElem.stop(true, true).slideUp(300, function() {
+                        formElem.addClass('d-none');
+                    });
+                    iconElem.removeClass('rotate-down');
+                    btnElem.removeClass('text-primary');
+                }
+            });
+
+            $('#' + btn + 'Cancel').on('click', function() {
+                event.preventDefault();
+                formElem.stop(true, true).slideUp(300, function() {
+                    formElem.addClass('d-none');
+                });
+                iconElem.removeClass('rotate-down');
+                btnElem.removeClass('text-primary');
+                $('#' + formInput)[0].reset();
+                $('.preview').hide();
+                $('.placeholder').show();
+                $('.now').show();
+            });
+        }
+
+        buttonEvent('logoManagementBtn', 'logoFormContainer', 'logoForm');
+        buttonEvent('sliderManagementBtn', 'sliderFormContainer', 'sliderForm');
+        buttonEvent('heroManagementBtn', 'heroFormContainer', 'heroForm');
+
+        function previewImage(input, previewId, placeholderId, nowId) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#' + previewId).attr('src', e.target.result).show();
+                    $('#' + placeholderId).hide();
+                    $('#' + nowId).hide();
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                $('#' + previewId).hide();
+                $('#' + nowId).show();
+                $('#' + placeholderId).show();
+            }
+        }        
+
+        $('#primaryLogo').on('change', function() {
+            previewImage(this, 'primaryLogoPreview', 'primaryLogoPlaceholder', 'primaryLogoNow');
+        });
+
+        $('#secondaryLogo').on('change', function() {
+            previewImage(this, 'secondaryLogoPreview', 'secondaryLogoPlaceholder', 'secondaryLogoNow');
+        });
+
+        $('#hero_image').on('change', function() {
+            previewImage(this, 'heroPreview', 'heroPlaceholder', 'heroNow');
+        });
+
+        for (let i = 1 ; i <= 5 ; i++) {
+            $('#slider'+i.toString()).on('change', function() {
+                previewImage(this, 'slider'+i.toString()+'Preview', 'slider'+i.toString()+'Placeholder', 'slider'+i.toString()+'Now');
+            });
+        }
+
+        $('#logoForm').on('submit', function(event) {
+            event.preventDefault();
+            $('#loading').removeClass('d-none');
+            $('.overlay').removeClass('d-none');
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: "{% url 'upload-logo' %}",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    $('#loading').addClass('d-none');
+                    $('.overlay').addClass('d-none');
+                    if (response.status === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Upload Successfully',
+                            text: response.message,
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#198754',
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Upload Failed',
+                            text: response.message,
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#DC3545',
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#loading').addClass('d-none');
+                    $('.overlay').addClass('d-none');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred while uploading logos.',
+                        confirmButtonText: 'Ok',
+                        confirmButtonColor: '#DC3545',
+                    });
+                }
+            });
+        });
+        
+        $('#sliderForm').on('submit', function(event) {
+            event.preventDefault();
+            $('#loading').removeClass('d-none');
+            $('.overlay').removeClass('d-none');
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: "{% url 'upload-slider' %}",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    $('#loading').addClass('d-none');
+                    $('.overlay').addClass('d-none');
+                    if (response.status === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Upload Successfully',
+                            text: response.message,
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#198754',
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Upload Failed',
+                            text: response.message,
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#DC3545',
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#loading').addClass('d-none');
+                    $('.overlay').addClass('d-none');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred while uploading images.',
+                        confirmButtonText: 'Ok',
+                        confirmButtonColor: '#DC3545',
+                    });
+                }
+            });
+        });
+
+        $('#heroForm').on('submit', function(event) {
+            event.preventDefault();
+            $('#loading').removeClass('d-none');
+            $('.overlay').removeClass('d-none');
+
+            let heroText = $('#hero_text').val().trim();
+            $('#hero_text').val(heroText);
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: "{% url 'upload-hero' %}",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    $('#loading').addClass('d-none');
+                    $('.overlay').addClass('d-none');
+                    if (response.status === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Upload Successfully',
+                            text: response.message,
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#198754',
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Upload Failed',
+                            text: response.message,
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#DC3545',
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#loading').addClass('d-none');
+                    $('.overlay').addClass('d-none');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred while uploading images.',
+                        confirmButtonText: 'Ok',
+                        confirmButtonColor: '#DC3545',
+                    });
+                }
+            });
+        });
+
+        $('#hero_text').on('input', function() {
+            $(this).val($(this).val().trim());
+        });
+    });
+</script>
 
 {% endblock %}

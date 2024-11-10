@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand fw-semibold text-white" href="{% url 'home' %}">
             <span class="me-2">
-                <img src="static/NusaHealthApp/images/SecondaryLogo.png" alt="Logo XXX" width="50px">
+                <img src="{{logo.secondary_logo.url}}" alt="Logo XXX" width="50px">
             </span>
             NusaHealth
         </a>
@@ -65,7 +65,7 @@
         <div class="w-100 d-flex flex-column">
             <div class="text-white w-100 border-bottom border-white d-flex justify-content-between" style="padding-bottom: 5.5px;">
                 <a class="navbar-brand fw-semibold" href="{% url 'home' %}">
-                    <img src="static/NusaHealthApp/images/SecondaryLogo.png" alt="" width="50px" class="me-2">
+                    <img src="{{logo.secondary_logo.url}}" alt="" width="50px" class="me-2">
                     NusaHealth
                 </a>
                 <button id="closeSideBar" class="navbar-toggler text-white border-0" type="button">

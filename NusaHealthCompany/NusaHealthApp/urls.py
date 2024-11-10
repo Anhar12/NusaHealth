@@ -11,4 +11,7 @@ urlpatterns = [
     path('dashboard/content-management', views.ContentManagement, name='content-management'),
     path('dashboard/blogs-management', views.BlogsManagement, name='blogs-management'),
     path('dashboard/activities-management', views.ActivitiesManagement, name='activities-management'),
+    path('dashboard/upload-logo', views.UploadLogo, name='upload-logo'),
+    path('dashboard/upload-slider', views.UploadSlider, name='upload-slider'),
+    path('dashboard/upload-hero', views.UploadHero, name='upload-hero'),
 ]

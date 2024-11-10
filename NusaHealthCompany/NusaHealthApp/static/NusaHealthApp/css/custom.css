@@ -403,6 +403,27 @@ footer a.nav-link:hover {
     height: 4rem;
 }
 
+.rotate-down {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.btn-expand-management {
+    cursor: pointer;
+}
+
+.btn-expand-management p {
+    transition: color 0.3s ease-in-out;
+}
+
+.btn-expand-management:hover p{
+    color: #2FCCFF;
+}
+
+textarea {
+    white-space: normal;
+}
+
 @media only screen and (max-width: 768px) {
     #sidebar-mcu {
         position: fixed !important;
