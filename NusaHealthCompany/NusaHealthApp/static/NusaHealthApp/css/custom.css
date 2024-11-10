@@ -39,6 +39,19 @@
     border: #00C1FF !important;
 }
 
+.btn-secondary {
+    background-color: #ffffff !important;  /* Warna latar belakang putih */
+    border: 1px solid #2FCCFF !important; /* Outline biru */
+    color: #2FCCFF !important;            /* Teks berwarna biru */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #2FCCFF !important;  /* Warna latar biru saat hover */
+    color: #ffffff !important;            /* Teks berubah menjadi putih saat hover */
+}
+
+
 .text-warning {
     color: #FCB316 !important;
 }
@@ -132,12 +145,16 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    width: 100%;
+    max-width: 20rem; /
 }
 
 .card-img-top {
     display: block;
     width: 100%;
     height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     transition: opacity 0.4s ease;
 }
 
@@ -402,6 +419,18 @@ footer a.nav-link:hover {
     width: 4rem;
     height: 4rem;
 }
+
+.w-40 {
+    width: 40% !important;
+}
+
+.rounded-circle {
+    border-radius: 50%; /* Makes the image circular */
+    width: 140px; /* Set both width */
+    height: 140px; /* and height to make it a 1:1 ratio */
+    object-fit: cover; /* Ensures the image scales to fit within the circular frame */
+}
+
 
 @media only screen and (max-width: 768px) {
     #sidebar-mcu {
