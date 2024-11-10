@@ -41,15 +41,15 @@
             </ul>          
             
             <ul class="navbar-nav ms-auto me-3 gap-2">          
-                {% if request.session.user_id %}
+                {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link fw-semibold" href="#">
+                        <a class="nav-link fw-semibold" href="{% url 'sign-out' %}">
                             Sign Out <i class="fa-solid fa-arrow-right-from-bracket ms-2"></i>
                         </a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link fw-semibold {% if section == 'signIn' %}active{% endif %}" href="#">
+                        <a class="nav-link fw-semibold {% if section == 'sign-in' %} active{% endif %}" href="{% url 'sign-in' %}">
                             Sign In<i class="fas fa-arrow-right-to-bracket ms-2"></i>
                         </a>
                     </li>
@@ -122,18 +122,14 @@
         </div>
 
         <ul class="navbar-nav d-flex flex-column w-100 border-top boder-light pt-2 px-3">
-            {% if request.session.user_id %}
-                <li class="nav-item">
-                    <a class="nav-link fw-semibold" href="#">
-                        Sign Out <i class="fa-solid fa-arrow-right-from-bracket ms-2"></i>
-                    </a>
-                </li>
+            {% if user.is_authenticated %}
+                <a class="nav-link fw-semibold" href="{% url 'sign-out' %}">
+                    Sign Out <i class="fa-solid fa-arrow-right-from-bracket ms-2"></i>
+                </a>
             {% else %}
-                <li class="nav-item">
-                    <a class="nav-link fw-semibold {% if section == 'signIn' %}active{% endif %}" href="#">
-                        Sign In <i class="fas fa-arrow-right-to-bracket ms-2"></i>
-                    </a>
-                </li>
+                <a class="nav-link fw-semibold {% if section == 'sign-in' %}active{% endif %}" href="{% url 'sign-in' %}">
+                    Sign In <i class="fas fa-arrow-right-to-bracket ms-2"></i>
+                </a>
             {% endif %}
         </ul>
     </div>
