@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'NusaHealthApp',
     'django_bootstrap5',
+    
+    'taggit',
 ]
 
 MIDDLEWARE = [
