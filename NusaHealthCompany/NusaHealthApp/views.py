@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from .decorators import admin_required
-from .models import Logo, ImageSlider, HeroSection, ServiceSection, PhilosphySection, VisionMissionSection, BusinessStructure, SolutionsSection
+from .models import Logo, ImageSlider, HeroSection, ServiceSection, PhilosphySection, VisionMissionSection, BusinessStructure, SolutionsSection, ContactSection, LocationSection
 from markdown2 import markdown
 import os
 
@@ -11,13 +11,15 @@ def Home(request):
     image_slider = ImageSlider.objects.first()
     hero = HeroSection.objects.first()
     services = ServiceSection.objects.first()
+    contact = ContactSection.objects.first()
 
     context = {
         'section': 'home',
         'logo': logo_instance,
         'slider': image_slider,
         'hero': hero,
-        'services': services
+        'services': services,
+        'contact': contact
     }
     return render(request, 'Home/index.html', context)
 
@@ -27,6 +29,7 @@ def About(request):
     vision_mission = VisionMissionSection.objects.first()
     business_structure = BusinessStructure.objects.first()
     solutions = SolutionsSection.objects.first()
+    contact = ContactSection.objects.first()
 
     if vision_mission and vision_mission.vision_text:
         vision = vision_mission.vision_text
@@ -45,16 +48,21 @@ def About(request):
         'vision': vision,
         'mission': mission_text_html,
         'business_structure': business_structure,
-        'solutions': solutions
+        'solutions': solutions,
+        'contact': contact
     }
     return render(request, 'Home/about.html', context)
 
 def Contact(request):
     logo_instance = Logo.objects.first()
+    contact = ContactSection.objects.first()
+    location = LocationSection.objects.first()
 
     context = {
         'section': 'contact',
-        'logo': logo_instance
+        'logo': logo_instance,
+        'contact': contact,
+        'location': location
     }
     return render(request, 'Home/contact.html', context)
 
@@ -125,6 +133,8 @@ def ContentManagement(request):
     vision_mission = VisionMissionSection.objects.first()
     business_structure = BusinessStructure.objects.first()
     solutions = SolutionsSection.objects.first()
+    contact = ContactSection.objects.first()
+    location = LocationSection.objects.first()
 
     context = {
         'section': 'content-management',
@@ -135,7 +145,9 @@ def ContentManagement(request):
         'philosophy': philosophy,
         'vision_mission': vision_mission,
         'business_structure': business_structure,
-        'solutions': solutions
+        'solutions': solutions,
+        'contact': contact,
+        'location': location
     }
     return render(request, 'Dashboard/content-management.html', context)
 
@@ -368,3 +380,90 @@ def UploadBusinessStructure(request):
 
     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)
 
+@admin_required()
+def UploadSolutions(request):
+    if request.method == 'POST':
+        solutions_instance = SolutionsSection.objects.first() or SolutionsSection()
+
+        solution_title1 = request.POST.get('solution_title1')
+        solutions_instance.solution_title1 = solution_title1 if solution_title1 else ""
+        solution_description1 = request.POST.get('solution_description1', '').strip()
+        solutions_instance.solution_description1 = solution_description1 if solution_description1 else ""
+
+        solution_title2 = request.POST.get('solution_title2')
+        solutions_instance.solution_title2 = solution_title2 if solution_title2 else ""
+        solution_description2 = request.POST.get('solution_description2', '').strip()
+        solutions_instance.solution_description2 = solution_description2 if solution_description2 else ""
+
+        solution_title3 = request.POST.get('solution_title3')
+        solutions_instance.solution_title3 = solution_title3 if solution_title3 else ""
+        solution_description3 = request.POST.get('solution_description3', '').strip()
+        solutions_instance.solution_description3 = solution_description3 if solution_description3 else ""
+
+        solutions_instance.save()
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Solutions section updated successfully.'
+        })
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)
+
+@admin_required()
+def UploadContact(request):
+    if request.method == 'POST':
+        contact_instance = ContactSection.objects.first() or ContactSection()
+
+        phone_number = request.POST.get('phone_number')
+        contact_instance.phone_number = phone_number if phone_number else ""
+
+        whatsapp = request.POST.get('whatsapp')
+        contact_instance.whatsapp = whatsapp if whatsapp else ""
+
+        email = request.POST.get('email')
+        contact_instance.email = email if email else ""
+
+        instagram = request.POST.get('instagram')
+        contact_instance.instagram = instagram if instagram else ""
+
+        facebook = request.POST.get('facebook')
+        contact_instance.facebook = facebook if facebook else ""
+        
+        address = request.POST.get('address', '').strip()
+        contact_instance.address = address if address else ""
+
+        contact_instance.save()
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Contact section updated successfully.'
+        })
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)
+
+@admin_required()
+def UploadLocation(request):
+    if request.method == 'POST':
+        location_instance = LocationSection.objects.first() or LocationSection()
+
+        try:
+            latitude = float(request.POST.get('latitude'))
+            longitude = float(request.POST.get('longitude'))
+        except (TypeError, ValueError):
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Latitude and longitude must be valid floating-point numbers.'
+            }, status=400)
+
+        location_instance.latitude = latitude
+        location_instance.longitude = longitude
+        location_instance.save()
+
+        location_instance.save()
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Location section updated successfully.'
+        })
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)

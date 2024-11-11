@@ -87,7 +87,26 @@ class SolutionsSection(models.Model):
     
     def __str__(self):
         return "Solutions Section Settings"
-      
+
+class ContactSection(models.Model):
+    phone_number = models.CharField(max_length=50, help_text="Phone Number", blank=True, null=True)
+    email = models.EmailField(max_length=100, help_text="Email", blank=True, null=True)
+    address = models.TextField(help_text="Address", blank=True, null=True)
+    whatsapp = models.CharField(max_length=50, help_text="Whatsapp", blank=True, null=True)
+    instagram = models.CharField(max_length=50, help_text="Instagram", blank=True, null=True)
+    facebook = models.CharField(max_length=50, help_text="Facebook", blank=True, null=True)
+    
+    def __str__(self):
+        return "Solutions Section Settings"
+    
+class LocationSection(models.Model):
+    longitude = models.CharField(max_length=100, help_text="Longitude", blank=True, null=True)
+    latitude = models.CharField(max_length=100, help_text="Latitude", blank=True, null=True)
+
+    def __str__(self):
+        return "Location Section Settings"
+
+
 # ================= Blog Model =======================
 from django.utils import timezone
 from django.contrib.auth.models import User
