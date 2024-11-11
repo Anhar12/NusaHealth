@@ -195,9 +195,51 @@ def UploadHero(request):
 
         return JsonResponse({
             'status': 'success',
-            'message': 'Hero section updated successfully.',
-            'hero_image_name': os.path.basename(hero_instance.hero_image.name) if hero_instance.hero_image else None,
-            'hero_text': hero_instance.hero_text
+            'message': 'Hero section updated successfully.'
+        })
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)
+
+@admin_required()
+def UploadServices(request):
+    if request.method == 'POST':
+        services_instance = ServiceSection.objects.first() or ServiceSection()
+
+        service_title1 = request.POST.get('service_title1')
+        services_instance.service_title1 = service_title1 if service_title1 else ""
+        service_description1 = request.POST.get('service_description1', '').strip()
+        services_instance.service_description1 = service_description1 if service_description1 else ""
+
+        service_title2 = request.POST.get('service_title2')
+        services_instance.service_title2 = service_title2 if service_title2 else ""
+        service_description2 = request.POST.get('service_description2', '').strip()
+        services_instance.service_description2 = service_description2 if service_description2 else ""
+
+        service_title3 = request.POST.get('service_title3')
+        services_instance.service_title3 = service_title3 if service_title3 else ""
+        service_description3 = request.POST.get('service_description3', '').strip()
+        services_instance.service_description3 = service_description3 if service_description3 else ""
+
+        if 'service_image1' in request.FILES:
+            if services_instance.service_image1:
+                delete_old_file(services_instance.service_image1.path)
+            services_instance.service_image1 = request.FILES['service_image1']
+
+        if 'service_image2' in request.FILES:
+            if services_instance.service_image2:
+                delete_old_file(services_instance.service_image2.path)
+            services_instance.service_image2 = request.FILES['service_image2']
+
+        if 'service_image3' in request.FILES:
+            if services_instance.service_image3:
+                delete_old_file(services_instance.service_image3.path)
+            services_instance.service_image3 = request.FILES['service_image3']
+
+        services_instance.save()
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Services section updated successfully.'
         })
 
     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)

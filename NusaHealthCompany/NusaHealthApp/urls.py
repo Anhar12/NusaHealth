@@ -14,4 +14,5 @@ urlpatterns = [
     path('dashboard/upload-logo', views.UploadLogo, name='upload-logo'),
     path('dashboard/upload-slider', views.UploadSlider, name='upload-slider'),
     path('dashboard/upload-hero', views.UploadHero, name='upload-hero'),
+    path('dashboard/upload-services', views.UploadServices, name='upload-services'),
 ]

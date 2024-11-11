@@ -162,6 +162,104 @@ Content Management - Nusa Health Company
                 </form>                
             </div>
         </div>
+
+        <div class="w-100 bg-white border fw-bold rounded-1 shadow-sm btn-expand-management">
+            <p id="servicesManagementBtn" class="d-flex px-5 py-3 gap-3 align-items-center m-0 border-bottom">
+                <i id="servicesManagementBtnIcon" class="fa-solid fa-angles-right fs-3" style="transition: transform 0.3s ease-in-out;"></i>
+                Services Section Management
+            </p>
+            
+            <div id="servicesFormContainer" class="d-none px-5">
+                <form id="servicesForm" class="ps-4 ms-3 py-3" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="d-flex flex-wrap justify-content-around mb-4">
+                        <div class="">
+                            <label for="service_image1" class="">Hero Image</label>
+                            <input type="file" class="form-control" id="service_image1" name="service_image1" style="max-width: 250px;">
+                            <img id="service1Preview" class="preview mt-2" style="max-width: 250px; display: none;" />
+                            {% if services and services.service_image1 %}
+                                <img id="service1Now" src="{{ services.service_image1.url }}" alt="Service Image" class="now mt-2" style="max-width: 250px;">
+                            {% else %}
+                                <p id="service1Placeholder" class="mt-2 text-muted">No service image uploaded</p>
+                            {% endif %}
+                        </div>
+                        <div class="w-50">
+                            <label for="service_title1" class="">Service Title</label>
+                            {% if services and services.service_title1 %}
+                                <input type="text" class="form-control mb-3" id="service_title1" name="service_title1" value="{{ services.service_title1 }}">
+                            {% else %}
+                                <input type="text" class="form-control mb-3" id="service_title1" name="service_title1">
+                            {% endif %}
+                            <label for="service_description1" class="">Service Description</label>
+                            <textarea class="form-control" id="service_description1" name="service_description1" rows="6">
+                                {% if services and services.service_description1 %}
+                                    {{ services.service_description1 }}
+                                {% endif %}
+                            </textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex flex-wrap justify-content-around mb-4">
+                        <div class="">
+                            <label for="service_image2" class="">Hero Image</label>
+                            <input type="file" class="form-control" id="service_image2" name="service_image2" style="max-width: 250px;">
+                            <img id="service2Preview" class="preview mt-2" style="max-width: 250px; display: none;" />
+                            {% if services and services.service_image2 %}
+                                <img id="service2Now" src="{{ services.service_image2.url }}" alt="Service Image" class="now mt-2" style="max-width: 250px;">
+                            {% else %}
+                                <p id="service2Placeholder" class="mt-2 text-muted">No service image uploaded</p>
+                            {% endif %}
+                        </div>
+                        <div class="w-50">
+                            <label for="service_title2" class="">Service Title</label>
+                            {% if services and services.service_title2 %}
+                                <input type="text" class="form-control mb-3" id="service_title2" name="service_title2" value="{{ services.service_title2 }}">
+                            {% else %}
+                                <input type="text" class="form-control mb-3" id="service_title2" name="service_title2">
+                            {% endif %}
+                            <label for="service_description2" class="">Service Description</label>
+                            <textarea class="form-control" id="service_description2" name="service_description2" rows="6">
+                                {% if services and services.service_description2 %}
+                                    {{ services.service_description2 }}
+                                {% endif %}
+                            </textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex flex-wrap justify-content-around mb-4">
+                        <div class="">
+                            <label for="service_image3" class="">Hero Image</label>
+                            <input type="file" class="form-control" id="service_image3" name="service_image3" style="max-width: 250px;">
+                            <img id="service3Preview" class="preview mt-2" style="max-width: 250px; display: none;" />
+                            {% if services and services.service_image3 %}
+                                <img id="service3Now" src="{{ services.service_image3.url }}" alt="Service Image" class="now mt-2" style="max-width: 250px;">
+                            {% else %}
+                                <p id="service3Placeholder" class="mt-2 text-muted">No service image uploaded</p>
+                            {% endif %}
+                        </div>
+                        <div class="w-50">
+                            <label for="service_title3" class="">Service Title</label>
+                            {% if services and services.service_title3 %}
+                                <input type="text" class="form-control mb-3" id="service_title3" name="service_title3" value="{{ services.service_title3 }}">
+                            {% else %}
+                                <input type="text" class="form-control mb-3" id="service_title3" name="service_title3">
+                            {% endif %}
+                            <label for="service_description3" class="">Service Description</label>
+                            <textarea class="form-control" id="service_description3" name="service_description3" rows="6">
+                                {% if services and services.service_description3 %}
+                                    {{ services.service_description3 }}
+                                {% endif %}
+                            </textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex gap-3 pt-2">
+                        <button type="submit" class="btn btn-success px-3 fw-semibold">Save</button>
+                        <button id="servicesManagementBtnCancel" class="btn btn-danger px-3 fw-semibold">Cancel</button>
+                    </div>
+                </form>                
+            </div>
+        </div>
     </div>
 </div>
 
@@ -172,6 +270,9 @@ Content Management - Nusa Health Company
 <script>
     $(document).ready(function() {
         $('#hero_text').val($('#hero_text').val().trim());
+        $('#service_description1').val($('#service_description1').val().trim());
+        $('#service_description2').val($('#service_description2').val().trim());
+        $('#service_description3').val($('#service_description3').val().trim());
         function buttonEvent(btn, formContainer, formInput) {
             var formElem = $('#' + formContainer);
             var iconElem = $('#' + btn + 'Icon');
@@ -212,6 +313,7 @@ Content Management - Nusa Health Company
         buttonEvent('logoManagementBtn', 'logoFormContainer', 'logoForm');
         buttonEvent('sliderManagementBtn', 'sliderFormContainer', 'sliderForm');
         buttonEvent('heroManagementBtn', 'heroFormContainer', 'heroForm');
+        buttonEvent('servicesManagementBtn', 'servicesFormContainer', 'servicesForm');
 
         function previewImage(input, previewId, placeholderId, nowId) {
             if (input.files && input.files[0]) {
@@ -244,6 +346,12 @@ Content Management - Nusa Health Company
         for (let i = 1 ; i <= 5 ; i++) {
             $('#slider'+i.toString()).on('change', function() {
                 previewImage(this, 'slider'+i.toString()+'Preview', 'slider'+i.toString()+'Placeholder', 'slider'+i.toString()+'Now');
+            });
+        }
+
+        for (let i = 1 ; i <= 3 ; i++) {
+            $('#service_image'+i.toString()).on('change', function() {
+                previewImage(this, 'service'+i.toString()+'Preview', 'service'+i.toString()+'Placeholder', 'service'+i.toString()+'Now');
             });
         }
 
@@ -408,9 +516,65 @@ Content Management - Nusa Health Company
                 }
             });
         });
+        
+        $('#servicesForm').on('submit', function(event) {
+            event.preventDefault();
+            $('#loading').removeClass('d-none');
+            $('.overlay').removeClass('d-none');
 
-        $('#hero_text').on('input', function() {
-            $(this).val($(this).val().trim());
+            $('#service_title1').val($('#service_title1').val().trim());
+            $('#service_title2').val($('#service_title2').val().trim());
+            $('#service_title3').val($('#service_title3').val().trim());
+            $('#service_description1').val($('#service_description1').val().trim());
+            $('#service_description2').val($('#service_description2').val().trim());
+            $('#service_description3').val($('#service_description3').val().trim());
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: "{% url 'upload-services' %}",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    $('#loading').addClass('d-none');
+                    $('.overlay').addClass('d-none');
+                    if (response.status === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Upload Successfully',
+                            text: response.message,
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#198754',
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Upload Failed',
+                            text: response.message,
+                            confirmButtonText: 'Ok',
+                            confirmButtonColor: '#DC3545',
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#loading').addClass('d-none');
+                    $('.overlay').addClass('d-none');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred while uploading images.',
+                        confirmButtonText: 'Ok',
+                        confirmButtonColor: '#DC3545',
+                    });
+                }
+            });
         });
     });
 </script>

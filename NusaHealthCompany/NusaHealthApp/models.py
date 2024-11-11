@@ -26,12 +26,20 @@ class HeroSection(models.Model):
         return "Hero Section Settings"
     
 class ServiceSection(models.Model):
-    title = models.CharField(max_length=100, blank=True, null=True, help_text="Service title")
-    description = models.TextField(help_text="Service description", blank=True, null=True)
-    image = models.ImageField(upload_to='services/', blank=True, null=True, help_text="Service image")
+    service_title1 = models.CharField(max_length=100, blank=True, null=True, help_text="Service title")
+    service_description1 = models.TextField(help_text="Service description", blank=True, null=True)
+    service_image1 = models.ImageField(upload_to='services/', blank=True, null=True, help_text="Service image")
+    
+    service_title2 = models.CharField(max_length=100, blank=True, null=True, help_text="Service title")
+    service_description2 = models.TextField(help_text="Service description", blank=True, null=True)
+    service_image2 = models.ImageField(upload_to='services/', blank=True, null=True, help_text="Service image")
+    
+    service_title3 = models.CharField(max_length=100, blank=True, null=True, help_text="Service title")
+    service_description3 = models.TextField(help_text="Service description", blank=True, null=True)
+    service_image3 = models.ImageField(upload_to='services/', blank=True, null=True, help_text="Service image")
 
     def __str__(self):
-        return self.title
+        return f"{self.title1}, {self.title2}, {self.title3}"
       
 # ================= Blog Model =======================
 from django.utils import timezone
