@@ -357,14 +357,14 @@ def UploadBusinessStructure(request):
             business_instance.image_coo = request.FILES['business2']
 
         if 'business3' in request.FILES:
-            if business_instance.image_cto:
-                delete_old_file(business_instance.image_cto.path)
-            business_instance.image_cto = request.FILES['business3']
-
-        if 'business4' in request.FILES:
             if business_instance.image_cfo:
                 delete_old_file(business_instance.image_cfo.path)
-            business_instance.image_cfo = request.FILES['business4']
+            business_instance.image_cfo = request.FILES['business3']
+
+        if 'business4' in request.FILES:
+            if business_instance.image_cto:
+                delete_old_file(business_instance.image_cto.path)
+            business_instance.image_cto = request.FILES['business4']
 
         if 'business5' in request.FILES:
             if business_instance.image_cmo:
