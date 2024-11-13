@@ -29,6 +29,24 @@ def About(request):
     }
     return render(request, 'Home/about.html', context)
 
+def Blogs(request):
+    logo_instance = Logo.objects.first()
+    
+    context = {
+        'section': 'blogs',
+        'logo': logo_instance
+    }
+    return render(request, 'Home/blogs.html', context)
+
+def Activities(request):
+    logo_instance = Logo.objects.first()
+    
+    context = {
+        'section': 'activities',
+        'logo': logo_instance
+    }
+    return render(request, 'Home/activities.html', context)
+    
 def Contact(request):
     logo_instance = Logo.objects.first()
 
@@ -243,4 +261,3 @@ def UploadServices(request):
         })
 
     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)
-

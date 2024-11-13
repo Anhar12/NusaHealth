@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}
+Blogs - Nusa Health Company
+{% endblock %}
+
+{% block content %}
+
+<!-- Blogs start -->
+<section id="blogs" class="py-5">
+    <div class="container py-5">
+        <h1 class="text-center fw-bold text-primary">NusaHealth's Blogs</h1>
+        <p class="lead mb-5 text-secondary text-center">
+            <i>Here we share articles about healthy lifestyle, health tips, and the latest information about the world of health.</i>
+        </p>
+
+        <div class="text-dark border border-primary p-3 rounded shadow-btn btn" style="width: 80rem;">
+            <div class="row g-0">
+                <!-- Gambar di Kiri -->
+                <div class="col-md-6">
+                    <img src="static/NusaHealthApp/images/philosophy.png" class="d-block mx-auto w-100 mb-2 rounded-1" alt="Featured Blog Image" style="object-fit: cover;">
+                </div>
+                <!-- Konten di Kanan -->
+                <div class="col-md-6 d-flex flex-column justify-content-center p-4 text-start">
+                    <h3 class="text-primary fw-bold">Global health advocate calls on the importance of One Health</h3>
+                    <p class="text-secondary border-bottom pb-4 mb-4">Lorem ipsum dolor sit amet consectetur adipiscing elit mattis sit pellentesque odio sit aliquam in ridiculus neque ultricies.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button class="btn btn-outline-primary btn-sm">Category</button>
+                        <span class="text-muted">Jan 24, 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <!-- Latest Blogs Section -->
+         <div id="latest-blogs" class="container my-5">
+            <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-4">
+                <h2 class="fw-bold mb-1 text-primary">Latest Blogs</h2>
+                <div>
+                    <button class="btn btn-primary me-2">Active</button>
+                    <button class="btn btn-outline-primary me-2">Category</button>
+                    <button class="btn btn-outline-primary me-2">Category</button>
+                    <button class="btn btn-outline-primary">Category</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ms-5" >
+            <!-- Blog Card 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 1">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-1 text-primary">Breakthroughs Under the Lens: How Microscopic Discoveries Lead to New Treatments</h5>
+                        <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <button class="btn btn-outline-primary btn-sm">Category</button>
+                        <span class="text-muted">Jan 24, 2024</span>
+                    </div>
+                </div>
+            </div>
+             <!-- Blog Card 2 -->
+             <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 2">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-1 text-primary">Exploring the Daily Dose: What You Should Know About Modern Medications</h5>
+                        <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <button class="btn btn-outline-primary btn-sm">Category</button>
+                        <span class="text-muted">Jan 24, 2024</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Blog Card 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 3">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-1 text-primary">How to Make the Most of Your Health Insurance Benefits</h5>
+                        <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <button class="btn btn-outline-primary btn-sm">Category</button>
+                        <span class="text-muted">Jan 30, 2024</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Blog Card 4 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 3">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-1 text-primary">Diet for Losing Weigth: Foods to Eat and Avoid</h5>
+                        <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <button class="btn btn-outline-primary btn-sm">Category</button>
+                        <span class="text-muted">Jan 30, 2024</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Blog Card 5 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 3">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-1 text-primary">From Cells to Cures: The Role of Microscopes in Modern Medical Research</h5>
+                        <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <button class="btn btn-outline-primary btn-sm">Category</button>
+                        <span class="text-muted">Jan 30, 2024</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Blog Card 6 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 3">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-1 text-primary">The Future of Surgery: Robotics, AI, and Innovations in the OR</h5>
+                        <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <button class="btn btn-outline-primary btn-sm">Category</button>
+                        <span class="text-muted">Jan 30, 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

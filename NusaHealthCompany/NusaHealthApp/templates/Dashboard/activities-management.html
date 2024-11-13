@@ -1,9 +1,171 @@
 {% extends "Dashboard/base.html" %}
-
+{% load static %}
 {% block title %}
 Activities Management - Nusa Health Company
 {% endblock %}
 
 {% block content %}
+<div class="container pb-3">
+    <div class="w-100 py-3">
+        <h4 class="text-center fw-bold">Activities Management</h4>
+    </div>
 
+    <div class="d-flex flex-column gap-2 align-items-center w-100 container">
+        <div class="w-100 bg-white border fw-bold rounded-1 shadow-sm btn-expand-management">
+            <form method="GET" class="d-flex mb-3 mx-3 my-5">
+                <input class="form-control me-2 w-75" type="search" name="q" placeholder="Search activities..." value="{{ query|default:'' }}" aria-label="Search">
+                <button class="btn btn-outline-primary btn-sm" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-outline-success btn-sm ms-auto" type="submit">Add New</button>
+            </form>
+            <!-- Latest Blogs Section -->
+            <div id="latest-blogs" class="container mx-1 my-5">
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-4 mb-4">
+                    <h4 class="fw-bold mb-1 text-primary ms-2">Latest Activities</h4>
+                    <div>
+                        <button class="btn btn-primary me-2">Active</button>
+                        <button class="btn btn-outline-primary me-2">Category</button>
+                        <button class="btn btn-outline-primary me-2">Category</button>
+                        <button class="btn btn-outline-primary">Category</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ms-5">
+                <!-- Blog Card 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 1">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-1 text-primary">Meet the Heroes Behind the Scenes: Celebrating Our Hospital Volunteers</h5>
+                            <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-primary btn-sm">Category</button>
+                            <span class="text-muted">Jan 24, 2024</span>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end" style="border-top: none;">
+                            <button class="btn btn-sm mx-1" type="submit">
+                                <i class="fas fa-pencil-alt text-warning"></i>
+                            </button>
+                            <button class="btn btn-sm" type="submit">
+                                <i class="fas fa-trash-alt text-danger"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog Card 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 2">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-1 text-primary">Making Healthcare Accessible: Our Commitment to Helping the Homeless</h5>
+                            <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-primary btn-sm">Category</button>
+                            <span class="text-muted">Jan 24, 2024</span>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end" style="border-top: none;">
+                            <button class="btn btn-sm mx-1" type="submit">
+                                <i class="fas fa-pencil-alt text-warning"></i>
+                            </button>
+                            <button class="btn btn-sm" type="submit">
+                                <i class="fas fa-trash-alt text-danger"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog Card 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 3">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-1 text-primary">Working Through the Toughest Days to Care for You</h5>
+                            <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-primary btn-sm">Category</button>
+                            <span class="text-muted">Jan 30, 2024</span>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end" style="border-top: none;">
+                            <button class="btn btn-sm mx-1" type="submit">
+                                <i class="fas fa-pencil-alt text-warning"></i>
+                            </button>
+                            <button class="btn btn-sm" type="submit">
+                                <i class="fas fa-trash-alt text-danger"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog Card 4 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 3">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-1 text-primary">Creating Spaces that Help Our Patients Heal</h5>
+                            <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-primary btn-sm">Category</button>
+                            <span class="text-muted">Jan 30, 2024</span>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end" style="border-top: none;">
+                            <button class="btn btn-sm mx-1" type="submit">
+                                <i class="fas fa-pencil-alt text-warning"></i>
+                            </button>
+                            <button class="btn btn-sm" type="submit">
+                                <i class="fas fa-trash-alt text-danger"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog Card 5 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 3">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-1 text-primary">Celebrating a Miraculous Surgery</h5>
+                            <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-primary btn-sm">Category</button>
+                            <span class="text-muted">Jan 30, 2024</span>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end" style="border-top: none;">
+                            <button class="btn btn-sm mx-1" type="submit">
+                                <i class="fas fa-pencil-alt text-warning"></i>
+                            </button>
+                            <button class="btn btn-sm" type="submit">
+                                <i class="fas fa-trash-alt text-danger"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog Card 6 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 3">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-1 text-primary">The Impact of Our Blood Donation Drive</h5>
+                            <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-primary btn-sm">Category</button>
+                            <span class="text-muted">Jan 30, 2024</span>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end" style="border-top: none;">
+                            <button class="btn btn-sm mx-1" type="submit">
+                                <i class="fas fa-pencil-alt text-warning"></i>
+                            </button>
+                            <button class="btn btn-sm" type="submit">
+                                <i class="fas fa-trash-alt text-danger"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
