@@ -264,6 +264,10 @@ footer a.nav-link:hover {
     transition: all 0.3s ease;
 }
 
+.placeholder {
+    background: none !important;
+}
+
 .form-control:focus + .form-label,
 .form-control:not(:placeholder-shown) + .form-label {
     top: -10px;

@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from .decorators import admin_required
-from .models import Logo, ImageSlider, HeroSection, ServiceSection
+from .models import Logo, ImageSlider, HeroSection, ServiceSection, PhilosphySection, VisionMissionSection, BusinessStructure, SolutionsSection, ContactSection, LocationSection
+from markdown2 import markdown
 import os
 
 def Home(request):
@@ -10,22 +11,45 @@ def Home(request):
     image_slider = ImageSlider.objects.first()
     hero = HeroSection.objects.first()
     services = ServiceSection.objects.first()
+    contact = ContactSection.objects.first()
 
     context = {
         'section': 'home',
         'logo': logo_instance,
         'slider': image_slider,
         'hero': hero,
-        'services': services
+        'services': services,
+        'contact': contact
     }
     return render(request, 'Home/index.html', context)
 
 def About(request):
     logo_instance = Logo.objects.first()
+    philosophy = PhilosphySection.objects.first()
+    vision_mission = VisionMissionSection.objects.first()
+    business_structure = BusinessStructure.objects.first()
+    solutions = SolutionsSection.objects.first()
+    contact = ContactSection.objects.first()
+
+    if vision_mission and vision_mission.vision_text:
+        vision = vision_mission.vision_text
+    else:
+        vision = ""
+    
+    if vision_mission and vision_mission.mission_text:
+        mission_text_html = markdown(vision_mission.mission_text)
+    else:
+        mission_text_html = ""
 
     context = {
         'section': 'about',
-        'logo': logo_instance
+        'logo': logo_instance,
+        'philosophy': philosophy,
+        'vision': vision,
+        'mission': mission_text_html,
+        'business_structure': business_structure,
+        'solutions': solutions,
+        'contact': contact
     }
     return render(request, 'Home/about.html', context)
 
@@ -49,10 +73,14 @@ def Activities(request):
     
 def Contact(request):
     logo_instance = Logo.objects.first()
+    contact = ContactSection.objects.first()
+    location = LocationSection.objects.first()
 
     context = {
         'section': 'contact',
-        'logo': logo_instance
+        'logo': logo_instance,
+        'contact': contact,
+        'location': location
     }
     return render(request, 'Home/contact.html', context)
 
@@ -119,6 +147,12 @@ def ContentManagement(request):
     image_slider = ImageSlider.objects.first()
     hero = HeroSection.objects.first()
     services = ServiceSection.objects.first()
+    philosophy = PhilosphySection.objects.first()
+    vision_mission = VisionMissionSection.objects.first()
+    business_structure = BusinessStructure.objects.first()
+    solutions = SolutionsSection.objects.first()
+    contact = ContactSection.objects.first()
+    location = LocationSection.objects.first()
 
     context = {
         'section': 'content-management',
@@ -126,6 +160,12 @@ def ContentManagement(request):
         'slider': image_slider,
         'hero': hero,
         'services': services,
+        'philosophy': philosophy,
+        'vision_mission': vision_mission,
+        'business_structure': business_structure,
+        'solutions': solutions,
+        'contact': contact,
+        'location': location
     }
     return render(request, 'Dashboard/content-management.html', context)
 
@@ -258,6 +298,188 @@ def UploadServices(request):
         return JsonResponse({
             'status': 'success',
             'message': 'Services section updated successfully.'
+        })
+
+@admin_required()
+def UploadPhilosophy(request):
+    if request.method == 'POST':
+        philosophy_instance = PhilosphySection.objects.first() or PhilosphySection()
+
+        philosophy_text = request.POST.get('philosophy_text', '').strip()
+        philosophy_instance.philosophy_text = philosophy_text if philosophy_text else ""
+
+        if 'philosophy_image' in request.FILES:
+            if philosophy_instance.philosophy_image:
+                delete_old_file(philosophy_instance.philosophy_image.path)
+            philosophy_instance.philosophy_image = request.FILES['philosophy_image']
+
+        philosophy_instance.save()
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Philosophy section updated successfully.'
+        })
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)
+
+@admin_required()
+def UploadVisionMission(request):
+    if request.method == 'POST':
+        vision_mission_instance = VisionMissionSection.objects.first() or VisionMissionSection()
+
+        vision_text = request.POST.get('vision_text', '').strip()
+        vision_mission_instance.vision_text = vision_text if vision_text else ""
+
+        mission_text = request.POST.get('mission_text', '').strip()
+        vision_mission_instance.mission_text = mission_text if mission_text else ""
+        
+        vision_mission_instance.save()
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Vision and Mission section updated successfully.'
+        })
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)
+
+@admin_required()
+def UploadBusinessStructure(request):
+    if request.method == 'POST':
+        business_instance = BusinessStructure.objects.first() or BusinessStructure()
+        
+        name_ceo = request.POST.get('name_ceo')
+        business_instance.name_ceo = name_ceo if name_ceo else ""
+        
+        name_coo = request.POST.get('name_coo')
+        business_instance.name_coo = name_coo if name_coo else ""
+        
+        name_cto = request.POST.get('name_cto')
+        business_instance.name_cto = name_cto if name_cto else ""
+        
+        name_cfo = request.POST.get('name_cfo')
+        business_instance.name_cfo = name_cfo if name_cfo else ""
+        
+        name_cmo = request.POST.get('name_cmo')
+        business_instance.name_cmo = name_cmo if name_cmo else ""
+
+        if 'business1' in request.FILES:
+            if business_instance.image_ceo:
+                delete_old_file(business_instance.image_ceo.path)
+            business_instance.image_ceo = request.FILES['business1']
+
+        if 'business2' in request.FILES:
+            if business_instance.image_coo:
+                delete_old_file(business_instance.image_coo.path)
+            business_instance.image_coo = request.FILES['business2']
+
+        if 'business3' in request.FILES:
+            if business_instance.image_cfo:
+                delete_old_file(business_instance.image_cfo.path)
+            business_instance.image_cfo = request.FILES['business3']
+
+        if 'business4' in request.FILES:
+            if business_instance.image_cto:
+                delete_old_file(business_instance.image_cto.path)
+            business_instance.image_cto = request.FILES['business4']
+
+        if 'business5' in request.FILES:
+            if business_instance.image_cmo:
+                delete_old_file(business_instance.image_cmo.path)
+            business_instance.image_cmo = request.FILES['business5']
+
+        business_instance.save()
+        
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Business structure updated successfully.'
+        })
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)
+
+@admin_required()
+def UploadSolutions(request):
+    if request.method == 'POST':
+        solutions_instance = SolutionsSection.objects.first() or SolutionsSection()
+
+        solution_title1 = request.POST.get('solution_title1')
+        solutions_instance.solution_title1 = solution_title1 if solution_title1 else ""
+        solution_description1 = request.POST.get('solution_description1', '').strip()
+        solutions_instance.solution_description1 = solution_description1 if solution_description1 else ""
+
+        solution_title2 = request.POST.get('solution_title2')
+        solutions_instance.solution_title2 = solution_title2 if solution_title2 else ""
+        solution_description2 = request.POST.get('solution_description2', '').strip()
+        solutions_instance.solution_description2 = solution_description2 if solution_description2 else ""
+
+        solution_title3 = request.POST.get('solution_title3')
+        solutions_instance.solution_title3 = solution_title3 if solution_title3 else ""
+        solution_description3 = request.POST.get('solution_description3', '').strip()
+        solutions_instance.solution_description3 = solution_description3 if solution_description3 else ""
+
+        solutions_instance.save()
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Solutions section updated successfully.'
+        })
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)
+
+@admin_required()
+def UploadContact(request):
+    if request.method == 'POST':
+        contact_instance = ContactSection.objects.first() or ContactSection()
+
+        phone_number = request.POST.get('phone_number')
+        contact_instance.phone_number = phone_number if phone_number else ""
+
+        whatsapp = request.POST.get('whatsapp')
+        contact_instance.whatsapp = whatsapp if whatsapp else ""
+
+        email = request.POST.get('email')
+        contact_instance.email = email if email else ""
+
+        instagram = request.POST.get('instagram')
+        contact_instance.instagram = instagram if instagram else ""
+
+        facebook = request.POST.get('facebook')
+        contact_instance.facebook = facebook if facebook else ""
+        
+        address = request.POST.get('address', '').strip()
+        contact_instance.address = address if address else ""
+
+        contact_instance.save()
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Contact section updated successfully.'
+        })
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)
+
+@admin_required()
+def UploadLocation(request):
+    if request.method == 'POST':
+        location_instance = LocationSection.objects.first() or LocationSection()
+
+        try:
+            latitude = float(request.POST.get('latitude'))
+            longitude = float(request.POST.get('longitude'))
+        except (TypeError, ValueError):
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Latitude and longitude must be valid floating-point numbers.'
+            }, status=400)
+
+        location_instance.latitude = latitude
+        location_instance.longitude = longitude
+        location_instance.save()
+
+        location_instance.save()
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Location section updated successfully.'
         })
 
     return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=400)

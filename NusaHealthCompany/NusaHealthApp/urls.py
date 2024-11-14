@@ -17,4 +17,10 @@ urlpatterns = [
     path('dashboard/upload-slider', views.UploadSlider, name='upload-slider'),
     path('dashboard/upload-hero', views.UploadHero, name='upload-hero'),
     path('dashboard/upload-services', views.UploadServices, name='upload-services'),
+    path('dashboard/upload-philosophy', views.UploadPhilosophy, name='upload-philosophy'),
+    path('dashboard/upload-vision-mission', views.UploadVisionMission, name='upload-vision-mission'),
+    path('dashboard/upload-business-structure', views.UploadBusinessStructure, name='upload-business-structure'),
+    path('dashboard/upload-solutions', views.UploadSolutions, name='upload-solutions'),
+    path('dashboard/upload-contact', views.UploadContact, name='upload-contact'),
+    path('dashboard/upload-location', views.UploadLocation, name='upload-location'),
 ]

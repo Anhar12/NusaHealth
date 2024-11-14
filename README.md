@@ -8,10 +8,10 @@
 ```bash
 git clone https://github.com/Anhar12/NusaHealth.git
 ```
-- Change Directory to NusaHealthCompany
+- Change Directory to NusaHealth
 
 ```bash
-cd NusaHealthCompany
+cd NusaHealth
 ```
 - Install pipenv (if not installed)
 

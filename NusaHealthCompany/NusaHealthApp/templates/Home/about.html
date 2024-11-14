@@ -12,12 +12,11 @@ About - Nusa Health Company
         <div class="col-lg-6">
             <h1 class="fw-bold mb-1 text-primary">PHILOSOPHY</span></h1>
             <p class="lead mb-1 text-justify">
-                NusaHealth was founded with a noble purpose: to make quality healthcare accessible to everyone. Rooted in Indonesia, we believe that health is not just a necessity but a fundamental right for all. Guided by our slogan “Health Care for All,” we are committed to providing comprehensive healthcare solutions, from trusted medications to modern, professional clinic services. Our experienced medical team and state-of-the-art technology enable us to deliver innovative and effective care, prioritizing prevention, early detection, and proper treatment.
+                {{philosophy.philosophy_text}}
             </p>
         </div>
         <div class="col-lg-5">
-            <img src="static/NusaHealthApp/images/philosophy.png" class="d-block mx-auto h-100 w-100 mb-2 rounded-1"
-                alt="NusaHealth" loading="lazy">
+            <img src="{{philosophy.philosophy_image.url}}" class="d-block mx-auto h-100 w-100 mb-2 rounded-1" alt="NusaHealth Philosophy" loading="lazy">
         </div>
     </div>
 </section>
@@ -37,27 +36,13 @@ About - Nusa Health Company
                 <div class="mb-4">
                     <h2 class="fw-bold mb-1 text-primary">Vision</span></h1>
                     <p class="lead mb-1 text-justify">
-                        To be the leading provider of healthcare services, ensuring access to high-quality healthcare for all and fostering healthier and more prosperous lives.
+                        {{ vision }}
                     </p>
                 </div>
                 <h2 class="fw-bold mb-1 text-primary">Mission</span></h1>
-                <ol class="lead mb-1 text-justify">
-                    <li>
-                        To provide comprehensive and reliable healthcare services, including the sale of medications and modern clinic care.
-                    </li>
-                    <li>
-                        To leverage advanced technology and an experienced medical team to deliver the best possible care to patients.
-                    </li>
-                    <li>
-                        To promote prevention, early detection, and effective treatment to enhance the quality of life in the community.
-                    </li>
-                    <li>
-                        To offer inclusive and affordable healthcare services, staying true to our slogan, "Health Care for All."
-                    </li>
-                    <li>
-                        To build strong relationships with the community to support sustainable public health.
-                    </li>
-                </ol>
+                <div class="lead mb-1 text-justify">
+                    {{ mission|safe }}
+                </div>
                 </p>
             </div>
         </div>
@@ -69,70 +54,70 @@ About - Nusa Health Company
 <section id="business-structure" class="py-5">
     <div class="container py-5">
         <h1 class="text-center fw-bold text-primary">BUSINESS STRUCTURE</h1>
-        <p class="lead mb-5 text-secondary text-center"><i>NusaHealth’s Vision & Mission</i></p>
+        <p class="lead mb-5 text-secondary text-center"><i>NusaHealth’s Business Structure</i></p>
         <div class="d-flex flex-wrap justify-content-center gap-4">
-            <div class="card border border-dark" style="width: 12rem;">
+            <div class="card border border-dark shadow" style="width: 12rem;">
                 <div class="d-flex justify-content-center pt-5 pb-3">
-                    <img src="static/NusaHealthApp/images/person1.jpg" alt="" width="150rem" height="150rem" class="rounded-circle">
+                    <img src="{{business_structure.image_ceo.url}}" alt="" width="150rem" height="150rem" class="rounded-circle">
                 </div>
                 <h2 class="fw-bold text-center">
                     CEO
                 </h2>
                 <div class="px-3 bg-warning border-dark border-top pt-3 h-100 d-flex align-items-center justify-content-center">
                     <p class="text-white text-center fw-bold">
-                        Anhar Khoirun Najib
+                        {{business_structure.name_ceo}}
                     </p>
                 </div>
             </div>
-            <div class="card border border-dark" style="width: 12rem;">
+            <div class="card border border-dark shadow" style="width: 12rem;">
                 <div class="d-flex justify-content-center pt-5 pb-3">
-                    <img src="static/NusaHealthApp/images/person2.jpg" alt="" width="150rem" height="150rem" class="rounded-circle">
+                    <img src="{{business_structure.image_coo.url}}" alt="" width="150rem" height="150rem" class="rounded-circle">
                 </div>
                 <h2 class="fw-bold text-center">
-                    CTO
+                    COO
                 </h2>
                 <div class="px-3 bg-warning border-dark border-top pt-3 h-100 d-flex align-items-center justify-content-center">
                     <p class="text-white text-center fw-bold">
-                        Ahmad Dhiya Ulhaqi
+                        {{business_structure.name_coo}}
                     </p>
                 </div>
             </div>
-            <div class="card border border-dark" style="width: 12rem;">
+            <div class="card border border-dark shadow" style="width: 12rem;">
                 <div class="d-flex justify-content-center pt-5 pb-3">
-                    <img src="static/NusaHealthApp/images/person3.jpg" alt="" width="150rem" height="150rem" class="rounded-circle">
+                    <img src="{{business_structure.image_cfo.url}}" alt="" width="150rem" height="150rem" class="rounded-circle">
                 </div>
                 <h2 class="fw-bold text-center">
                     CFO
                 </h2>
                 <div class="px-3 bg-warning border-dark border-top pt-3 h-100 d-flex align-items-center justify-content-center">
                     <p class="text-white text-center fw-bold">
-                        Salwa Arlinda Humairah
+                        {{business_structure.name_cfo}}
                     </p>
                 </div>
             </div>
-            <div class="card border border-dark" style="width: 12rem;">
+            <div class="card border border-dark shadow" style="width: 12rem;">
                 <div class="d-flex justify-content-center pt-5 pb-3">
-                    <img src="static/NusaHealthApp/images/person4.jpg" alt="" width="150rem" height="150rem" class="rounded-circle">
+                    <img src="{{business_structure.image_cto.url}}" alt="" width="150rem" height="150rem" class="rounded-circle">
                 </div>
                 <h2 class="fw-bold text-center">
                     CTO
                 </h2>
                 <div class="px-3 bg-warning border-dark border-top pt-3 h-100 d-flex align-items-center justify-content-center">
                     <p class="text-white text-center fw-bold">
-                        Muhammad Muchlis Abimanyu
+                        {{business_structure.name_cto}}
                     </p>
                 </div>
             </div>
-            <div class="card border border-dark" style="width: 12rem;">
+            <div class="card border border-dark shadow" style="width: 12rem;">
                 <div class="d-flex justify-content-center pt-5 pb-3">
-                    <img src="static/NusaHealthApp/images/person5.jpg" alt="" width="150rem" height="150rem" class="rounded-circle">
+                    <img src="{{business_structure.image_cmo.url}}" alt="" width="150rem" height="150rem" class="rounded-circle">
                 </div>
                 <h2 class="fw-bold text-center">
                     CMO
                 </h2>
                 <div class="px-3 bg-warning border-dark border-top pt-3 h-100 d-flex align-items-center justify-content-center">
                     <p class="text-white text-center fw-bold">
-                        Natanael Primus Lung Hanyang Ngau
+                        {{business_structure.name_cmo}}
                     </p>
                 </div>
             </div>
@@ -152,9 +137,9 @@ About - Nusa Health Company
                     <i class="fa-solid fa-hand-holding-medical text-warning" style="font-size: 100px;"></i>
                 </div>
                 <div class="card-body px-3 py-2">
-                    <h5 class="card-title py-3 m-0 text-dark border-bottom text-center fw-bold">Health Care for All</h5>
+                    <h5 class="card-title py-3 m-0 text-dark border-bottom text-center fw-bold">{{solutions.solution_title1}}</h5>
                     <p class="card-text py-3 text-secondary text-justify">
-                        Dedicated to making quality healthcare accessible and affordable for everyone.
+                        {{solutions.solution_description1}}
                     </p>
                 </div>
             </div>
@@ -163,9 +148,9 @@ About - Nusa Health Company
                     <i class="fa-solid fa-user-doctor text-warning" style="font-size: 100px;"></i>
                 </div>
                 <div class="card-body px-3 py-2">
-                    <h5 class="card-title py-3 m-0 text-dark border-bottom text-center fw-bold">Professionals</h5>
+                    <h5 class="card-title py-3 m-0 text-dark border-bottom text-center fw-bold">{{solutions.solution_title2}}</h5>
                     <p class="card-text py-3 text-secondary text-justify text-center">
-                        Skilled and experienced professional medical personnel.
+                        {{solutions.solution_description2}}
                     </p>
                 </div>
             </div>
@@ -174,9 +159,9 @@ About - Nusa Health Company
                     <i class="fa-solid fa-laptop-medical text-warning" style="font-size: 100px;"></i>
                 </div>
                 <div class="card-body px-3 py-2">
-                    <h5 class="card-title py-3 m-0 text-dark border-bottom text-center fw-bold">Cutting-Edge Technology</h5>
+                    <h5 class="card-title py-3 m-0 text-dark border-bottom text-center fw-bold">{{solutions.solution_title3}}</h5>
                     <p class="card-text py-3 text-secondary text-justify text-center">
-                        Skilled and experienced team of doctors and health experts.
+                        {{solutions.solution_description3}}
                     </p>
                 </div>
             </div>

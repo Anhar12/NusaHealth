@@ -40,7 +40,73 @@ class ServiceSection(models.Model):
 
     def __str__(self):
         return f"{self.title1}, {self.title2}, {self.title3}"
-      
+    
+class PhilosphySection(models.Model):
+    philosophy_image = models.ImageField(upload_to='philosophy/', blank=True, null=True, help_text="Philosophy section image")
+    philosophy_text = models.TextField(help_text="Philosphy section text", blank=True, null=True)
+    
+    def __str__(self):
+        return "Philosophy Section Settings"
+    
+class VisionMissionSection(models.Model):
+    vision_text = models.TextField(help_text="Vision section text", blank=True, null=True)
+    mission_text = models.TextField(help_text="Mision section text", blank=True, null=True)
+    
+    def __str__(self):
+        return "Vision & Mision Section Settings"
+    
+class BusinessStructure(models.Model):
+    name_ceo = models.CharField(max_length=100, help_text="Name CEO", blank=True, null=True)
+    image_ceo = models.ImageField(upload_to='business_structure/', blank=True, null=True, help_text="business structure image")
+    
+    name_coo = models.CharField(max_length=100, help_text="Name COO", blank=True, null=True)
+    image_coo = models.ImageField(upload_to='business_structure/', blank=True, null=True, help_text="business structure image")
+    
+    name_cfo = models.CharField(max_length=100, help_text="Name CFO", blank=True, null=True)
+    image_cfo = models.ImageField(upload_to='business_structure/', blank=True, null=True, help_text="business structure image")
+    
+    name_cto = models.CharField(max_length=100, help_text="Name CTO", blank=True, null=True)
+    image_cto = models.ImageField(upload_to='business_structure/', blank=True, null=True, help_text="business structure image")
+    
+    name_cmo = models.CharField(max_length=100, help_text="Name CMO", blank=True, null=True)
+    image_cmo = models.ImageField(upload_to='business_structure/', blank=True, null=True, help_text="business structure image")
+    
+    
+    def __str__(self):
+        return f"ceo: {self.name_ceo}, coo: {self.name_coo}, cfo: {self.name_cfo}, cto: {self.name_cto}, cmo: {self.name_cmo}"
+    
+class SolutionsSection(models.Model):
+    solution_title1 = models.CharField(max_length=100, help_text="Solutions Title", blank=True, null=True)
+    solution_description1 = models.TextField(help_text="Solutions Description", blank=True, null=True)
+    
+    solution_title2 = models.CharField(max_length=100, help_text="Solutions Title", blank=True, null=True)
+    solution_description2 = models.TextField(help_text="Solutions Description", blank=True, null=True)
+    
+    solution_title3 = models.CharField(max_length=100, help_text="Solutions Title", blank=True, null=True)
+    solution_description3 = models.TextField(help_text="Solutions Description", blank=True, null=True)
+    
+    def __str__(self):
+        return "Solutions Section Settings"
+
+class ContactSection(models.Model):
+    phone_number = models.CharField(max_length=50, help_text="Phone Number", blank=True, null=True)
+    email = models.EmailField(max_length=100, help_text="Email", blank=True, null=True)
+    address = models.TextField(help_text="Address", blank=True, null=True)
+    whatsapp = models.CharField(max_length=50, help_text="Whatsapp", blank=True, null=True)
+    instagram = models.CharField(max_length=50, help_text="Instagram", blank=True, null=True)
+    facebook = models.CharField(max_length=50, help_text="Facebook", blank=True, null=True)
+    
+    def __str__(self):
+        return "Solutions Section Settings"
+    
+class LocationSection(models.Model):
+    longitude = models.CharField(max_length=100, help_text="Longitude", blank=True, null=True)
+    latitude = models.CharField(max_length=100, help_text="Latitude", blank=True, null=True)
+
+    def __str__(self):
+        return "Location Section Settings"
+
+
 # ================= Blog Model =======================
 from django.utils import timezone
 from django.contrib.auth.models import User

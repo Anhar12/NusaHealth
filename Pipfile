@@ -9,6 +9,7 @@ django-bootstrap5 = "*"
 faker = "*"
 pillow = "*"
 django-taggit = "*"
+markdown2 = "*"
 
 [dev-packages]
 
