@@ -33,7 +33,8 @@ Blogs Management - Nusa Health Company
             </div>
 
             <div class="row ms-5">
-                <!-- Blog Card 1 -->
+                {% if blogs %}
+                {% for blog in blogs %}
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <img src="/static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 1">
@@ -55,116 +56,7 @@ Blogs Management - Nusa Health Company
                         </div>
                     </div>
                 </div>
-                <!-- Blog Card 2 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="/static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 2">
-                        <div class="card-body">
-                            <h5 class="fw-bold mb-1 text-primary">Exploring the Daily Dose: What You Should Know About Modern Medications</h5>
-                            <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between align-items-center">
-                            <button class="btn btn-outline-primary btn-sm">Category</button>
-                            <span class="text-muted">Jan 24, 2024</span>
-                        </div>
-                        <div class="card-footer d-flex justify-content-end" style="border-top: none;">
-                            <button class="btn btn-sm mx-1" type="submit">
-                                <i class="fas fa-pencil-alt text-warning"></i>
-                            </button>
-                            <button class="btn btn-sm" type="submit">
-                                <i class="fas fa-trash-alt text-danger"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog Card 3 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="/static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 3">
-                        <div class="card-body">
-                            <h5 class="fw-bold mb-1 text-primary">How to Make the Most of Your Health Insurance Benefits</h5>
-                            <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between align-items-center">
-                            <button class="btn btn-outline-primary btn-sm">Category</button>
-                            <span class="text-muted">Jan 30, 2024</span>
-                        </div>
-                        <div class="card-footer d-flex justify-content-end" style="border-top: none;">
-                            <button class="btn btn-sm mx-1" type="submit">
-                                <i class="fas fa-pencil-alt text-warning"></i>
-                            </button>
-                            <button class="btn btn-sm" type="submit">
-                                <i class="fas fa-trash-alt text-danger"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog Card 4 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="/static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 3">
-                        <div class="card-body">
-                            <h5 class="fw-bold mb-1 text-primary">Diet for Losing Weigth: Foods to Eat and Avoid</h5>
-                            <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between align-items-center">
-                            <button class="btn btn-outline-primary btn-sm">Category</button>
-                            <span class="text-muted">Jan 30, 2024</span>
-                        </div>
-                        <div class="card-footer d-flex justify-content-end" style="border-top: none;">
-                            <button class="btn btn-sm mx-1" type="submit">
-                                <i class="fas fa-pencil-alt text-warning"></i>
-                            </button>
-                            <button class="btn btn-sm" type="submit">
-                                <i class="fas fa-trash-alt text-danger"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog Card 5 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="/static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 3">
-                        <div class="card-body">
-                            <h5 class="fw-bold mb-1 text-primary">From Cells to Cures: The Role of Microscopes in Modern Medical Research</h5>
-                            <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between align-items-center">
-                            <button class="btn btn-outline-primary btn-sm">Category</button>
-                            <span class="text-muted">Jan 30, 2024</span>
-                        </div>
-                        <div class="card-footer d-flex justify-content-end" style="border-top: none;">
-                            <button class="btn btn-sm mx-1" type="submit">
-                                <i class="fas fa-pencil-alt text-warning"></i>
-                            </button>
-                            <button class="btn btn-sm" type="submit">
-                                <i class="fas fa-trash-alt text-danger"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog Card 6 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="/static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 3">
-                        <div class="card-body">
-                            <h5 class="fw-bold mb-1 text-primary">The Future of Surgery: Robotics, AI, and Innovations in the OR</h5>
-                            <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between align-items-center">
-                            <button class="btn btn-outline-primary btn-sm">Category</button>
-                            <span class="text-muted">Jan 30, 2024</span>
-                        </div>
-                        <div class="card-footer d-flex justify-content-end" style="border-top: none;">
-                            <button class="btn btn-sm mx-1" type="submit">
-                                <i class="fas fa-pencil-alt text-warning"></i>
-                            </button>
-                            <button class="btn btn-sm" type="submit">
-                                <i class="fas fa-trash-alt text-danger"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            </div>
         </div>
     </div>
 </div>

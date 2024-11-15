@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from .decorators import admin_required
-from .models import Logo, ImageSlider, HeroSection, ServiceSection, PhilosphySection, VisionMissionSection, BusinessStructure, SolutionsSection, ContactSection, LocationSection
+from .models import Logo, ImageSlider, HeroSection, ServiceSection, PhilosphySection, VisionMissionSection, BusinessStructure, SolutionsSection, ContactSection, LocationSection, Blogs, Activities
 from markdown2 import markdown
 import os
 
@@ -53,7 +53,7 @@ def About(request):
     }
     return render(request, 'Home/about.html', context)
 
-def Blogs(request):
+def Blog(request):
     logo_instance = Logo.objects.first()
     
     context = {
@@ -62,7 +62,7 @@ def Blogs(request):
     }
     return render(request, 'Home/blogs.html', context)
 
-def Activities(request):
+def Activity(request):
     logo_instance = Logo.objects.first()
     
     context = {
@@ -124,20 +124,24 @@ def Dashboard(request):
 @admin_required()
 def BlogsManagement(request):
     logo_instance = Logo.objects.first()
+    blogs = Blogs.objects.all()
 
     context = {
         'section': 'blogs-management',
-        'logo': logo_instance
+        'logo': logo_instance,
+        'blogs': blogs
     }
     return render(request, 'Dashboard/blogs-management.html', context)
 
 @admin_required()
 def ActivitiesManagement(request):
     logo_instance = Logo.objects.first()
+    activities = Activities.objects.all()
 
     context = {
         'section': 'activities-management',
-        'logo': logo_instance
+        'logo': logo_instance,
+        'activities': activities
     }
     return render(request, 'Dashboard/activities-management.html', context)
 

@@ -1,4 +1,8 @@
 from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
+from django.urls import reverse
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class Logo(models.Model):
@@ -108,39 +112,33 @@ class LocationSection(models.Model):
 
 
 # ================= Blog Model =======================
-from django.utils import timezone
-from django.contrib.auth.models import User
-from django.urls import reverse
-from taggit.managers import TaggableManager
-
 class PublishedManager(models.Manager):
     def get_queryset(self):
         return super(PublishedManager,
                 self).get_queryset()\
                     .filter(status='published')
 
-class Post(models.Model):
+class Blogs(models.Model):
     STATUS_CHOICES = (
-    ('draft', 'Draft'),
-    ('published', 'Published'),
+        ('draft', 'Draft'),
+        ('published', 'Published'),
     )
     title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250,
-                            unique_for_date='publish')
-    author = models.ForeignKey(User,
-                               related_name='blog_posts', on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=250, unique_for_date='publish')
+    author = models.ForeignKey(User, related_name='blog_posts', on_delete=models.CASCADE)
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=10,
-                                choices=STATUS_CHOICES,
-                                default='draft')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     tags = TaggableManager()
-    objects = models.Manager() # The default manager.
-    published = PublishedManager() # Our custom manager.
+    objects = models.Manager()
+    published = PublishedManager()
+    image = models.ImageField(upload_to='blogs/', help_text="Upload image")
+    
     class Meta:
-         ordering = ('-publish',)
+        ordering = ('-publish',)
+        
     def __str__(self):
         return self.title
     
@@ -150,10 +148,41 @@ class Post(models.Model):
                             self.publish.strftime('%m'),
                             self.publish.strftime('%d'),
                             self.slug])
-                            
+
+class Activities(models.Model):
+    STATUS_CHOICES = (
+        ('draft', 'Draft'),
+        ('published', 'Published'),
+    )
+    title = models.CharField(max_length=250)
+    slug = models.SlugField(max_length=250, unique_for_date='publish')
+    author = models.ForeignKey(User, related_name='activities_posts', on_delete=models.CASCADE)
+    body = models.TextField()
+    publish = models.DateTimeField(default=timezone.now)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
+    tags = TaggableManager()
+    objects = models.Manager()
+    published = PublishedManager()
+    image = models.ImageField(upload_to='activities/', help_text="Upload image")
+    
+    class Meta:
+        ordering = ('-publish',)
+        
+    def __str__(self):
+        return self.title
+    
+    def get_absolute_url(self):
+        return reverse('activities:post_detail',
+                        args=[self.publish.year,
+                            self.publish.strftime('%m'),
+                            self.publish.strftime('%d'),
+                            self.slug])
+
     
 class Comment(models.Model):
-    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    post = models.ForeignKey(Blogs, related_name='comments', on_delete=models.CASCADE)
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()
