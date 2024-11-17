@@ -6,58 +6,153 @@ Blogs Management - Nusa Health Company
 
 {% block content %}
 <div class="container pb-3">
-    <div class="w-100 py-3">
+    <div class="w-100 py-3 mb-3">
         <h4 class="text-center fw-bold">Blogs Management</h4>
     </div>
 
-    <div class="d-flex flex-column gap-2 align-items-center w-100 container">
-        <div class="w-100 bg-white border fw-bold rounded-1 shadow-sm btn-expand-management">
-            <form method="GET" class="d-flex mb-3 mx-3 my-5">
-                <input class="form-control me-2 w-75" type="search" name="q" placeholder="Search blogs..." value="{{ query|default:'' }}" aria-label="Search">
-                <button class="btn btn-outline-primary btn-sm" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-outline-success btn-sm ms-auto" type="submit">Add New</button>
-            </form>
-            <!-- Latest Blogs Section -->
-            <div id="latest-blogs" class="container mx-1 my-5">
-                <div class="d-flex justify-content-between align-items-center border-bottom pb-4 mb-4">
-                    <h4 class="fw-bold mb-1 text-primary ms-2">Latest Blogs</h4>
-                    <div>
-                        <button class="btn btn-primary me-2">Active</button>
-                        <button class="btn btn-outline-primary me-2">Category</button>
-                        <button class="btn btn-outline-primary me-2">Category</button>
-                        <button class="btn btn-outline-primary">Category</button>
+    {% if blogs %}
+        <div class="d-flex flex-column gap-2 align-items-center w-100 container">
+            <div class="row w-100">
+                <form method="GET" class="col-10 d-flex gap-2" autocomplete="off">
+                    <input class="form-control w-75" type="search" name="q" placeholder="Search blogs" value="{{ query|default:'' }}" aria-label="Search">
+                    <button class="btn btn-outline-primary px-2" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                <a href="{% url 'blogs-management-add' %}" class="btn btn-success col-2">Add New Blogs</a>
+            </div>
+
+            <div id="latest-blogs" class="container py-3">
+                <div class="d-flex w-100 justify-content-between border-bottom py-2">
+                    <h4 class="fw-bold w-25">Latest Blogs</h4>
+
+                    <div class="row d-flex w-75 justify-content-end flex-wrap">
+                        {% for category_value, category_name in categories %}
+                            <a href="{% url 'blogs-management' %}" 
+                            class="btn btn-outline-primary btn-sm col-md-2 me-2 mb-2 category {% if forloop.counter > 4 %}d-none{% endif %}">
+                                {{ category_name }}
+                            </a>
+                        {% endfor %}
+                        
+                        <button id="show-all-btn" class="btn btn-primary btn-sm col-md-2 mb-2">Show All</button>
+
+                        <button id="show-less-btn" class="btn btn-secondary btn-sm col-md-2 mb-2 d-none">Show Less</button>
                     </div>
                 </div>
             </div>
 
-            <div class="row ms-5">
-                {% if blogs %}
+            <div class="row w-100 ">
                 {% for blog in blogs %}
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="/static/NusaHealthApp/images/philosophy.png" class="card-img-top" alt="Blog 1">
-                        <div class="card-body">
-                            <h5 class="fw-bold mb-1 text-primary">Breakthroughs Under the Lens: How Microscopic Discoveries Lead to New Treatments</h5>
-                            <p class="card-text text-muted my-3">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam in ridiculus neque ultricies.</p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between align-items-center">
-                            <button class="btn btn-outline-primary btn-sm">Category</button>
-                            <span class="text-muted">Jan 24, 2024</span>
-                        </div>
-                        <div class="card-footer d-flex justify-content-end" style="border-top: none;">
-                            <button class="btn btn-sm mx-1" type="submit">
-                                <i class="fas fa-pencil-alt text-warning"></i>
-                            </button>
-                            <button class="btn btn-sm" type="submit">
-                                <i class="fas fa-trash-alt text-danger"></i>
-                            </button>
+                    <div class="col-md-4 p-2 hover-scaleup" style="cursor: pointer;">
+                        <div class="rounded shadow bg-white overflow-hidden border">
+                            <img src="{{blog.image.url}}" class="w-100 m-0 border-bottom border-secondary" style="height: 200px; object-fit: cover;" alt="{{blog.title}}">
+    
+                            <div class="my-2 mx-3 border-bottom">
+                                <h5 class="fw-semibold text-truncate-1 fs-5" style="height: 25px;">
+                                    {{ blog.title }}
+                                </h5>
+    
+                                <p class="text-secondary fs-small text-truncate-3 text-justify" style="height: 55px;">
+                                    {{ blog.body }}
+                                </p>
+                            </div>
+    
+                            <div class="my-2 mx-3 row justify-content-between align-items-center overflow-hidden" style="height: 35px;">
+                                <div class="d-flex flex-wrap gap-2 col-8 p-0">
+                                    <span class="bg-primary text-white rounded fs-small py-1 px-3">{{ blog.category }}</span>
+                                </div>
+
+                                <div class="col-4 p-0">
+                                    <p class="m-0 text-end" style="font-size: 14px;">
+                                        {{blog.publish|date:"d, M Y"}}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="m-3 justify-content-end row">
+                                <div class="col-2 m-0 p-0 text-end">
+                                    <a href="{% url 'blogs-management-update' blog.id %}" class="text-warning fs-4"><i class="fas fa-pen"></i></a>
+                                </div>
+                                <div class="col-2 m-0 p-0 text-end">
+                                    <button class="text-danger fs-4 delete-btn border-0 bg-transparent" data-url="{% url 'blogs-management-delete' blog.id %}"><i class="fas fa-trash-alt delete-btn"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
-    </div>
+    {% else %}
+        <div class="w-100 py-3 container">
+            <div class="w-100 d-flex justify-content-end">
+                <a href="{% url 'blogs-management-add' %}" class="btn btn-success mb-3">Add New Blogs</a>
+            </div>
+            <div class="alert alert-warning text-center" role="alert">
+                No blogs found.
+            </div>
+        </div>
+    {% endif %}
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function () {
+        $("#show-all-btn").on("click", function () {
+            $(".category.d-none").removeClass("d-none");
+            $(this).hide();
+            $("#show-less-btn").removeClass("d-none");
+        });
+    
+        $("#show-less-btn").on("click", function () {
+            $(".category").slice(4).addClass("d-none");
+            $(this).addClass("d-none");
+            $("#show-all-btn").show();
+        });
+
+        $('.delete-btn').on('click', function(e) {
+            e.preventDefault();
+
+            var element = $(this);
+            var url = $(this).data('url');
+
+            Swal.fire({
+                title: 'Are you sure want to delete this blog?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Successfully',
+                                    text: response.message,
+                                    confirmButtonText: 'Ok',
+                                    confirmButtonColor: '#198754',
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire('Error', response.message, 'error');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire('Error', 'Something went wrong. Please try again.', 'error');
+                        }
+                    });
+                }
+            });
+        });
+    });    
+</script>
 {% endblock %}

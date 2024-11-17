@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from .decorators import admin_required
 from .models import Logo, ImageSlider, HeroSection, ServiceSection, PhilosphySection, VisionMissionSection, BusinessStructure, SolutionsSection, ContactSection, LocationSection, Blogs, Activities
+from taggit.models import Tag
+from .forms import BlogForm, ActivityForm
 from markdown2 import markdown
 import os
 
@@ -111,6 +113,12 @@ def SignOut(request):
     logout(request)
     return redirect('sign-in') 
 
+
+def delete_old_file(file_path):
+    if file_path and os.path.exists(file_path):
+        os.remove(file_path)
+
+
 @admin_required()
 def Dashboard(request):
     logo_instance = Logo.objects.first()
@@ -125,13 +133,77 @@ def Dashboard(request):
 def BlogsManagement(request):
     logo_instance = Logo.objects.first()
     blogs = Blogs.objects.all()
+    categories = Blogs.CATEGORIES
 
     context = {
         'section': 'blogs-management',
         'logo': logo_instance,
-        'blogs': blogs
+        'blogs': blogs,
+        'categories': categories
     }
     return render(request, 'Dashboard/blogs-management.html', context)
+
+@admin_required()
+def BlogsManagementAdd(request):
+    logo_instance = Logo.objects.first()
+    
+    if request.method == 'POST':
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.author = request.user
+            form.save()
+            return JsonResponse({'status': 'success', 'message': 'Blog added successfully.'})
+        else:
+            return JsonResponse({'status': 'error', 'message': form.errors})
+
+    context = {
+        'section': 'blogs-management',
+        'action': 'add',
+        'logo': logo_instance,
+        'form': BlogForm()
+    }
+    return render(request, 'Dashboard/blogs-management-form.html', context)
+
+@admin_required()
+def BlogsManagementUpdate(request, blog_id):
+    logo_instance = Logo.objects.first()
+    blog_instance = Blogs.objects.filter(id=blog_id).first()
+
+    if request.method == 'POST':
+        blog_instance.title = request.POST.get('title')
+        blog_instance.category = request.POST.get('category')
+        blog_instance.body = request.POST.get('body', '').strip()
+        
+        if 'image' in request.FILES:
+            if blog_instance.image:
+                delete_old_file(blog_instance.image.path)
+            blog_instance.image = request.FILES['image']
+        
+        blog_instance.save()
+
+        return JsonResponse({'status': 'success', 'message': 'Blog updated successfully.'})
+
+    context = {
+        'section': 'blogs-management',
+        'action': 'update',
+        'logo': logo_instance,
+        'form': BlogForm(instance=blog_instance),
+        'blog': blog_instance
+    }
+    return render(request, 'Dashboard/blogs-management-form.html', context)
+
+def BlogsManagementDelete(request, blog_id):
+    if request.method == 'DELETE':
+        try:
+            blog = Blogs.objects.get(id=blog_id)
+            if blog.image:
+                delete_old_file(blog.image.path)
+            blog.delete()
+            return JsonResponse({'status': 'success', 'message': 'Blog deleted successfully.'})
+        except Blogs.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Blog not found.'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
 
 @admin_required()
 def ActivitiesManagement(request):
@@ -144,6 +216,67 @@ def ActivitiesManagement(request):
         'activities': activities
     }
     return render(request, 'Dashboard/activities-management.html', context)
+
+@admin_required()
+def ActivitiesManagementAdd(request):
+    logo_instance = Logo.objects.first()
+    
+    if request.method == 'POST':
+        form = ActivityForm(request.POST, request.FILES)
+        if form.is_valid():
+            activity = form.save(commit=False)
+            activity.author = request.user
+            form.save()
+            return JsonResponse({'status': 'success', 'message': 'Activity added successfully.'})
+        else:
+            return JsonResponse({'status': 'error', 'message': form.errors})
+
+    context = {
+        'section': 'activities-management',
+        'action': 'add',
+        'logo': logo_instance,
+        'form': ActivityForm()
+    }
+    return render(request, 'Dashboard/activities-management-form.html', context)
+
+@admin_required()
+def ActivitiesManagementUpdate(request, activity_id):
+    logo_instance = Logo.objects.first()
+    activity_instance = Activities.objects.filter(id=activity_id).first()
+
+    if request.method == 'POST':
+        activity_instance.title = request.POST.get('title')
+        activity_instance.body = request.POST.get('body', '').strip()
+        
+        if 'image' in request.FILES:
+            if activity_instance.image:
+                delete_old_file(activity_instance.image.path)
+            activity_instance.image = request.FILES['image']
+        
+        activity_instance.save()
+
+        return JsonResponse({'status': 'success', 'message': 'Activity updated successfully.'})
+
+    context = {
+        'section': 'activities-management',
+        'action': 'update',
+        'logo': logo_instance,
+        'form': ActivityForm(instance=activity_instance),
+        'activity': activity_instance
+    }
+    return render(request, 'Dashboard/activities-management-form.html', context)
+
+def ActivitiesManagementDelete(request, activity_id):
+    if request.method == 'DELETE':
+        try:
+            activity = Activities.objects.get(id=activity_id)
+            if activity.image:
+                delete_old_file(activity.image.path)
+            activity.delete()
+            return JsonResponse({'status': 'success', 'message': 'Activity deleted successfully.'})
+        except Activities.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Activity not found.'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
 
 @admin_required()
 def ContentManagement(request):
@@ -172,10 +305,6 @@ def ContentManagement(request):
         'location': location
     }
     return render(request, 'Dashboard/content-management.html', context)
-
-def delete_old_file(file_path):
-    if file_path and os.path.exists(file_path):
-        os.remove(file_path)
 
 @admin_required()
 def UploadLogo(request):

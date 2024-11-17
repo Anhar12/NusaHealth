@@ -39,18 +39,17 @@
     border: #00C1FF !important;
 }
 
-.btn-secondary {
-    background-color: #ffffff !important;  /* Warna latar belakang putih */
-    border: 1px solid #2FCCFF !important; /* Outline biru */
-    color: #2FCCFF !important;            /* Teks berwarna biru */
+/* .btn-secondary {
+    background-color: #ffffff !important;  
+    border: 1px solid #2FCCFF !important; 
+    color: #2FCCFF !important;            
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-secondary:hover {
-    background-color: #2FCCFF !important;  /* Warna latar biru saat hover */
-    color: #ffffff !important;            /* Teks berubah menjadi putih saat hover */
-}
-
+    background-color: #2FCCFF !important;
+    color: #ffffff !important;    
+} */
 
 .text-warning {
     color: #FCB316 !important;
@@ -214,6 +213,20 @@
 .text-truncate-4 {
     display: -webkit-box;
     -webkit-line-clamp: 4; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.text-truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.text-truncate-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1; 
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -454,6 +467,14 @@ textarea {
     width: 140px; /* Set both width */
     height: 140px; /* and height to make it a 1:1 ratio */
     object-fit: cover; /* Ensures the image scales to fit within the circular frame */
+}
+
+.hover-scaleup {
+    transition: scale 0.3s ease-in-out;
+}
+
+.hover-scaleup:hover {
+    scale: 1.025;
 }
 
 @media only screen and (max-width: 768px) {

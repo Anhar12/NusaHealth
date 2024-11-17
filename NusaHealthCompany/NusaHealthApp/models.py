@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
-from taggit.managers import TaggableManager
 
 # Create your models here.
 class Logo(models.Model):
@@ -123,18 +122,31 @@ class Blogs(models.Model):
         ('draft', 'Draft'),
         ('published', 'Published'),
     )
+    CATEGORIES = (
+        ('technology', 'Technology'),
+        ('sports', 'Sports'),
+        ('health', 'Health'),
+        ('science', 'Science'),
+        ('services', 'Services'),
+        ('news', 'News'),
+        ('diseases', 'Diseases'),
+        ('events', 'Events'),
+        ('education', 'Education'),
+        ('lifestyle', 'LifeStyle'),
+        ('medicine', 'Medicine'),
+    )
     title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250, unique_for_date='publish')
-    author = models.ForeignKey(User, related_name='blog_posts', on_delete=models.CASCADE)
     body = models.TextField()
+    image = models.ImageField(upload_to='blogs/', help_text="Upload image")
+    author = models.ForeignKey(User, related_name='blog_posts', on_delete=models.CASCADE)
+    category = models.CharField(max_length=100, choices=CATEGORIES, default='health')
+    objects = models.Manager()
+    published = PublishedManager()
+    slug = models.SlugField(max_length=250, unique_for_date='publish')
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
-    tags = TaggableManager()
-    objects = models.Manager()
-    published = PublishedManager()
-    image = models.ImageField(upload_to='blogs/', help_text="Upload image")
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='published')
     
     class Meta:
         ordering = ('-publish',)
@@ -161,11 +173,10 @@ class Activities(models.Model):
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
-    tags = TaggableManager()
     objects = models.Manager()
     published = PublishedManager()
     image = models.ImageField(upload_to='activities/', help_text="Upload image")
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='published')
     
     class Meta:
         ordering = ('-publish',)
