@@ -57,27 +57,65 @@ def About(request):
 
 def Blog(request):
     logo_instance = Logo.objects.first()
-    blogs = Blogs.objects.all()
-    categories = Blogs.CATEGORIES
+
+    # Ambil blog terbaru (hanya satu) untuk ditampilkan di bagian latest
+    latest_blog = Blogs.objects.filter(status='published').order_by('-publish').first()
+
+    # Ambil semua blog yang sudah dipublikasikan, urutkan berdasarkan tanggal terbaru
+    blogs = Blogs.objects.filter(status='published').order_by('-publish')
+
+    # Ambil kategori yang dipilih dari URL
+    category_filter = request.GET.get('category')
+
+    if category_filter:
+        # Pastikan kategori yang dipilih adalah valid
+        blogs = blogs.filter(category=category_filter)
+
+    query = request.GET.get('q')   # Mendapatkan query dari form pencarian
     
+    if query:
+        # Jika ada query, filter blog berdasarkan judul
+        blogs = blogs.filter(title__icontains=query)
+
+    categories = Blogs.CATEGORIES  # Ambil kategori dari model
+
     context = {
         'section': 'blogs',
         'logo': logo_instance,
-        'blogs': blogs,
-        'categories': categories
+        'blogs': blogs,  # Semua blog (termasuk hasil pencarian dan kategori)
+        'latest_blog': latest_blog,  # Blog terbaru
+        'categories': categories,
+        'query': query,  # Menyimpan query untuk ditampilkan kembali di template
+        'selected_category': category_filter,  # Menyimpan kategori yang sedang dipilih
     }
     return render(request, 'Home/blogs.html', context)
 
 def Activity(request):
     logo_instance = Logo.objects.first()
-    activities = Activities.objects.all()
+    
+    # First, get all activities with status 'published', ordered by publish date
+    activities = Activities.objects.filter(status='published').order_by('-publish')
+    
+    # If there are activities, get the latest activity
+    latest_activity = activities.first()  # Get the first activity from the ordered list
+    
+    # Get search query from the GET request
+    query = request.GET.get('q', '').strip()  # Remove leading/trailing spaces
+    
+    # If a query is present, filter the activities
+    if query:
+        activities = activities.filter(title__icontains=query)
     
     context = {
         'section': 'activities',
         'logo': logo_instance,
-        'activities': activities
+        'activities': activities,
+        'latest_activity': latest_activity,
+        'query': query,  # Pass the query to the template for the search box
     }
+    
     return render(request, 'Home/activities.html', context)
+
     
 def Contact(request):
     logo_instance = Logo.objects.first()
@@ -136,16 +174,35 @@ def Dashboard(request):
 @admin_required()
 def BlogsManagement(request):
     logo_instance = Logo.objects.first()
+
+    # Inisialisasi queryset awal
     blogs = Blogs.objects.all()
+
+    # Ambil kategori yang dipilih dari URL
+    category_filter = request.GET.get('category')
+    if category_filter:
+        # Filter berdasarkan kategori
+        blogs = blogs.filter(category=category_filter)
+
+    # Ambil query dari form pencarian
+    query = request.GET.get('q')
+    if query:
+        # Filter berdasarkan judul jika query ada
+        blogs = blogs.filter(title__icontains=query)
+
+    # Ambil daftar kategori dari model
     categories = Blogs.CATEGORIES
 
     context = {
         'section': 'blogs-management',
         'logo': logo_instance,
-        'blogs': blogs,
-        'categories': categories
+        'blogs': blogs,  # Queryset terisi, baik kosong maupun dengan hasil
+        'categories': categories,
+        'query': query,  # Menyertakan query untuk menjaga nilai pencarian di input
+        'selected_category': category_filter,  # Menyertakan kategori yang terpilih
     }
     return render(request, 'Dashboard/blogs-management.html', context)
+
 
 @admin_required()
 def BlogsManagementAdd(request):
@@ -168,6 +225,7 @@ def BlogsManagementAdd(request):
         'form': BlogForm()
     }
     return render(request, 'Dashboard/blogs-management-form.html', context)
+
 
 @admin_required()
 def BlogsManagementUpdate(request, blog_id):
@@ -197,6 +255,7 @@ def BlogsManagementUpdate(request, blog_id):
     }
     return render(request, 'Dashboard/blogs-management-form.html', context)
 
+@admin_required()
 def BlogsManagementDelete(request, blog_id):
     if request.method == 'DELETE':
         try:
@@ -212,12 +271,20 @@ def BlogsManagementDelete(request, blog_id):
 @admin_required()
 def ActivitiesManagement(request):
     logo_instance = Logo.objects.first()
+    
     activities = Activities.objects.all()
+
+    # Ambil query dari form pencarian
+    query = request.GET.get('q')
+    if query:
+        # Filter berdasarkan judul jika query ada
+        activities = activities.filter(title__icontains=query)
 
     context = {
         'section': 'activities-management',
         'logo': logo_instance,
-        'activities': activities
+        'activities': activities,
+        'query': query,
     }
     return render(request, 'Dashboard/activities-management.html', context)
 
