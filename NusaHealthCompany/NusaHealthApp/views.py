@@ -57,19 +57,25 @@ def About(request):
 
 def Blog(request):
     logo_instance = Logo.objects.first()
+    blogs = Blogs.objects.all()
+    categories = Blogs.CATEGORIES
     
     context = {
         'section': 'blogs',
-        'logo': logo_instance
+        'logo': logo_instance,
+        'blogs': blogs,
+        'categories': categories
     }
     return render(request, 'Home/blogs.html', context)
 
 def Activity(request):
     logo_instance = Logo.objects.first()
+    activities = Activities.objects.all()
     
     context = {
         'section': 'activities',
-        'logo': logo_instance
+        'logo': logo_instance,
+        'activities': activities
     }
     return render(request, 'Home/activities.html', context)
     
@@ -113,11 +119,9 @@ def SignOut(request):
     logout(request)
     return redirect('sign-in') 
 
-
 def delete_old_file(file_path):
     if file_path and os.path.exists(file_path):
         os.remove(file_path)
-
 
 @admin_required()
 def Dashboard(request):
