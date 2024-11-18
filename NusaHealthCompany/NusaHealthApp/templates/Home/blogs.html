@@ -6,101 +6,46 @@ Blogs - Nusa Health Company
 
 {% block content %}
 
-<!-- Blogs start -->
-<section id="blogs" class="py-5">
-    {% if blogs %}
-        <div class="container pt-2">
-            <h1 class="text-center fw-bold text-primary">NusaHealth's Blogs</h1>
-            <p class="lead text-secondary text-center mb-4">
-                <i>Here we share articles about healthy lifestyle, health tips, and the latest information about the world of health.</i>
-            </p>
 
-            <div class="w-100 row rounded bg-white overflow-hidden shadow-card border border-primary mx-2 mb-5 " style="height: 350px;">
-                <div class="col-md-6 p-0">
-                    <img src="{{ firs_blog.image.url }}" alt="firs_blog.title" class="w-100" style="object-fit: cover; height: 350px;">
+<!-- Blogs start -->
+<section id="latest-blogs" class="py-5">
+    {% if latest_blog %}
+    <div class="container pt-2">
+        <h1 class="text-center fw-bold text-primary">NusaHealth's Blogs</h1>
+        <p class="lead text-secondary text-center mb-4">
+            <i>Here we share articles about healthy lifestyle, health tips, and the latest information about the world
+                of health.</i>
+        </p>
+
+        <div class="w-100 row rounded bg-white overflow-hidden shadow-card border border-primary mx-2 mb-5"
+            style="height: 350px;">
+            <div class="col-md-6 p-0">
+                <img src="{{ latest_blog.image.url }}" alt="{{ latest_blog.title }}" class="w-100"
+                    style="object-fit: cover; height: 350px;">
+            </div>
+            <div class="col-md-6 px-3 py-4">
+                <div class="border-bottom">
+                    <a href="#" class="text-decoration-none">
+                        <h4 class="text-primary fw-semibold text-truncate-2" style="height: 60px;">
+                            {{ latest_blog.title }}
+                        </h4>
+                    </a>
+                    <p class="text-secondary text-truncate-6" style="height: 145px;">
+                        {{ latest_blog.body }}
+                    </p>
                 </div>
-                <div class="col-md-6 px-3 py-4">
-                    <div class="border-bottom">
-                        <a href="#" class="text-decoration-none">
-                            <h4 class="text-primary fw-semibold text-truncate-2" style="height: 60px;">
-                                {{ firs_blog.title }}
-                            </h4>
-                        </a>
-                        <p class="text-secondary text-truncate-6" style="height: 145px;">
-                            {{ firs_blog.body }}
+
+                <div class="px-3 py-4 row justify-content-between align-items-center overflow-hidden"
+                    style="height: 80px;">
+                    <div class="d-flex flex-wrap gap-2 col-8 p-0">
+                        <span class="bg-primary text-white rounded py-1 px-3">{{ latest_blog.category }}</span>
+                    </div>
+
+                    <div class="col-4 p-0">
+                        <p class="m-0 text-end">
+                            {{ latest_blog.publish|date:"d, M Y" }}
                         </p>
                     </div>
-
-                    <div class="px-3 py-4 row justify-content-between align-items-center overflow-hidden" style="height: 80px;">
-                        <div class="d-flex flex-wrap gap-2 col-8 p-0">
-                            <span class="bg-primary text-white rounded py-1 px-3">{{ firs_blog.category }}</span>
-                        </div>
-
-                        <div class="col-4 p-0">
-                            <p class="m-0 text-end">
-                                {{firs_blog.publish|date:"d, M Y"}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="d-flex flex-column gap-2 align-items-center w-100">
-                <form method="GET" class="row container w-100 justify-content-between m-0" autocomplete="off">
-                    <input class="form-control" style="width: 95%;" type="search" name="q" placeholder="Search blogs" value="{{ query|default:'' }}" aria-label="Search">
-                    <button class="btn btn-outline-primary px-2" style="width: 4%;" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-    
-                <div id="latest-blogs" class="container py-3">
-                    <div class="d-flex w-100 justify-content-between border-bottom py-2">
-                        <h4 class="fw-bold w-25">Latest Blogs</h4>
-    
-                        <div class="row d-flex w-75 justify-content-end flex-wrap">
-                            {% for category_value, category_name in categories %}
-                                <a href="#" class="btn btn-outline-primary btn-sm col-md-2 me-2 mb-2 category {% if forloop.counter > 4 %}d-none{% endif %}">
-                                    {{ category_name }}
-                                </a>
-                            {% endfor %}
-                            
-                            <button id="show-all-btn" class="btn btn-primary btn-sm col-md-2 mb-2">Show All</button>
-    
-                            <button id="show-less-btn" class="btn btn-secondary btn-sm col-md-2 mb-2 d-none">Show Less</button>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="row w-100 ">
-                    {% for blog in blogs %}
-                        <div class="col-md-4 p-2" style="cursor: pointer;">
-                            <div class="rounded shadow hover-scaleup bg-white overflow-hidden border">
-                                <img src="{{blog.image.url}}" class="w-100 m-0 border-bottom border-secondary" style="height: 200px; object-fit: cover;" alt="{{blog.title}}">
-        
-                                <div class="my-2 mx-3 border-bottom">
-                                    <h5 class="fw-semibold text-truncate-1 fs-5" style="height: 25px;">
-                                        {{ blog.title }}
-                                    </h5>
-        
-                                    <p class="text-secondary fs-small text-truncate-3 text-justify" style="height: 55px;">
-                                        {{ blog.body }}
-                                    </p>
-                                </div>
-        
-                                <div class="m-3 row justify-content-between align-items-center overflow-hidden" style="height: 35px;">
-                                    <div class="d-flex flex-wrap gap-2 col-8 p-0">
-                                        <span class="bg-primary text-white rounded fs-small py-1 px-3">{{ blog.category }}</span>
-                                    </div>
-    
-                                    <div class="col-4 p-0">
-                                        <p class="m-0 text-end" style="font-size: 14px;">
-                                            {{blog.publish|date:"d, M Y"}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
                 </div>
 
                 <div class="pagination mt-3">
@@ -120,23 +65,131 @@ Blogs - Nusa Health Company
                 </div>
             </div>
         </div>
-    {% else %}
-        <div class="w-100 pt-5 container">
-            <div class="alert alert-warning text-center" role="alert">
-                No blogs found.
-            </div>
-        </div>
+    </div>
+
     {% endif %}
 </section>
 
+<!-- Search and Latest Blogs -->
+<section id="search-blogs" class="pb-5">
+    <div class="container">
+        <!-- SEARCH -->
+        <div class="d-flex flex-column gap-2 align-items-center w-100">
+            <form method="GET" class="row container w-100 justify-content-between" autocomplete="off">
+                <input class="form-control" style="width: 95%;" type="search" name="q" placeholder="Search blogs"
+                    value="{{ query|default:'' }}" aria-label="Search">
+                <button class="btn btn-outline-primary px-2" style="width: 4%;" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+
+
+            <div id="latest-blogs" class="container py-3">
+                <div class="d-flex w-100 justify-content-between border-bottom py-2">
+                    <h4 class="fw-bold w-25">Latest Blogs</h4>
+                    <div class="row d-flex w-75 justify-content-end flex-wrap">
+                        {% for category_value, category_name in categories %}
+                        <a href="?category={{ category_value }}&q={{ query|default:'' }}" class="btn btn-sm col-md-2 me-2 mb-2 {% if category_value == selected_category %}btn-primary{% else %}btn-outline-primary{% endif %} 
+                           {% if forloop.counter > 4 %}d-none category{% endif %}">
+                            {{ category_name }}
+                        </a>
+                        {% endfor %}
+
+                        <button id="show-all-btn" class="btn btn-primary btn-sm col-md-2 mb-2">Show All</button>
+                        <button id="show-less-btn" class="btn btn-secondary btn-sm col-md-2 mb-2 d-none">Show Less</button>
+                    </div>
+                </div>
+            </div>
+
+            {% if blogs %}
+            <div class="row w-100">
+                {% for blog in blogs %}
+                <div class="col-md-4 p-2" style="cursor: pointer;">
+                    <div class="rounded shadow-btn bg-white overflow-hidden border border-primary">
+                        <img src="{{ blog.image.url }}" class="w-100 m-0 border-bottom border-secondary"
+                            style="height: 200px; object-fit: cover;" alt="{{ blog.title }}">
+
+                        <div class="my-2 mx-3 border-bottom">
+                            <h5 class="fw-semibold text-truncate-1 fs-5" style="height: 25px;">
+                                {{ blog.title }}
+                            </h5>
+
+                            <p class="text-secondary fs-small text-truncate-3 text-justify" style="height: 55px;">
+                                {{ blog.body }}
+                            </p>
+                        </div>
+
+                        <div class="m-3 row justify-content-between align-items-center overflow-hidden"
+                            style="height: 35px;">
+                            <div class="d-flex flex-wrap gap-2 col-8 p-0">
+                                <span class="bg-primary text-white rounded fs-small py-1 px-3">{{ blog.category }}</span>
+                            </div>
+
+                            <div class="col-4 p-0">
+                                <p class="m-0 text-end" style="font-size: 14px;">
+                                    {{ blog.publish|date:"d, M Y" }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="pagination mt-3">
+                <span class="d-flex gap-2 align-items-center">
+                    {% if blogs.has_previous %}
+                        <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page=1"><i class="fa-solid fa-angles-left"></i></a>
+                        <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page={{ blogs.previous_page_number }}"><i class="fa-solid fa-angle-left"></i></a>
+                    {% endif %}
+            
+                    <span>Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}</span>
+            
+                    {% if blogs.has_next %}
+                        <a class="text-primary fs-3 fw-bold ms-2 text-decoration-none" href="?page={{ blogs.next_page_number }}"><i class="fa-solid fa-angle-right"></i></a>
+                        <a class="text-primary fs-3 fw-bold ms-2 text-decoration-none" href="?page={{ blogs.paginator.num_pages }}"><i class="fa-solid fa-angles-right"></i></a>
+                    {% endif %}
+                </span>
+            </div>
+            {% else %}
+            <div class="alert alert-warning text-center w-100">
+                No blogs found.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
 <script>
+
     $(document).ready(function () {
+
+        // Variabel untuk menyimpan posisi scroll
+        var lastScrollPosition = 0;
+
+        // Saat form disubmit
+        $("form").on("submit", function () {
+            // Simpan posisi scroll saat ini
+            lastScrollPosition = $(window).scrollTop();
+            // Simpan posisi scroll ke localStorage
+            localStorage.setItem("scrollPosition", lastScrollPosition);
+        });
+
+        // Setelah halaman selesai dimuat
+        $(window).on("load", function () {
+            // Ambil posisi scroll dari localStorage
+            var savedScrollPosition = localStorage.getItem("scrollPosition");
+            if (savedScrollPosition) {
+                $(window).scrollTop(savedScrollPosition);
+                localStorage.removeItem("scrollPosition");
+            }
+        });
+
         $("#show-all-btn").on("click", function () {
             $(".category.d-none").removeClass("d-none");
             $(this).hide();
             $("#show-less-btn").removeClass("d-none");
         });
-    
+
         $("#show-less-btn").on("click", function () {
             $(".category").slice(4).addClass("d-none");
             $(this).addClass("d-none");

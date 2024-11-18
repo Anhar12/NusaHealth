@@ -15,30 +15,11 @@ Contact - Nusa Health Company
         </p>
     
         <div class="d-flex flex-wrap justify-content-center gap-4">
-            <div class="text-dark border border-primary p-3 rounded shadow-btn btn" style="width: 22rem;">
+            <div class="text-dark border border-primary p-3 rounded shadow-btn btn" style="width: 18rem;">
                 <div class="text-center py-4 text-warning">
-                    <i class="fa-solid fa-address-book text-warning" style="font-size: 160px;"></i>
+                    <i class="fa-solid fa-user-group text-warning" style="font-size: 100px;"></i>
                 </div>
-                <h4 class="text-center border-bottom pt-2 pb-3 fw-semibold">Contact Information</h4>
-                <ul class="list-unstyled pt-3 text-secondary" style="text-align: start;">
-                    <li><i class="fas fa-phone me-2"></i> {{contact.phone_number}}</li>
-                    <li><i class="fa-solid fa-envelope me-2"></i> {{contact.email}}</li>
-                </ul>
-            </div>
-            
-            <div class="text-dark border border-primary p-3 rounded shadow-btn btn" style="width: 22rem;">
-                <div class="text-center py-4 text-warning">
-                    <i class="fa-solid fa-location-dot text-warning" style="font-size: 160px;"></i>
-                </div>
-                <h4 class="text-center border-bottom pt-2 pb-3 fw-semibold">Our Address</h4>
-                <p class="text-justify pt-3 text-secondary">{{contact.address}}</p>
-            </div>
-            
-            <div class="text-dark border border-primary p-3 rounded shadow-btn btn" style="width: 22rem;">
-                <div class="text-center py-4 text-warning">
-                    <i class="fa-solid fa-user-group text-warning" style="font-size: 160px;"></i>
-                </div>
-                <h4 class="text-center border-bottom pt-2 pb-3 fw-semibold">Feel Free To Reach Out</h4>
+                <h4 class="text-center border-bottom pt-2 pb-3 fw-semibold" style="font-size: 22px;">Feel Free To Reach Out</h4>
                 <div class="d-flex pt-4 flex-wrap justify-content-center gap-3">
                     <a href="mailto:{{contact.email}}" class="rounded-circle px-2 d-flex align-items-center py-2 btn btn-outline-secondary" style="width: 36px !important; height: 36px !important;">
                         <svg width="20" fill="currentcolor" viewBox="0 0 24 24">
@@ -63,6 +44,25 @@ Contact - Nusa Health Company
                     </a>                    
                 </div>
             </div>
+            
+            <div class="text-dark border border-primary p-3 rounded shadow-btn btn" style="width: 18rem;">
+                <div class="text-center py-4 text-warning">
+                    <i class="fa-solid fa-location-dot text-warning" style="font-size: 100px;"></i>
+                </div>
+                <h4 class="text-center border-bottom pt-2 pb-3 fw-semibold" style="font-size: 22px;">Our Address</h4>
+                <p class="text-justify pt-3 text-secondary">{{contact.address}}</p>
+            </div>
+            
+            <div class="text-dark border border-primary p-3 rounded shadow-btn btn" style="width: 18rem;">
+                <div class="text-center py-4 text-warning">
+                    <i class="fa-solid fa-address-book text-warning" style="font-size: 100px;"></i>
+                </div>
+                <h4 class="text-center border-bottom pt-2 pb-3 fw-semibold" style="font-size: 22px;">Contact Information</h4>
+                <ul class="list-unstyled pt-3 text-secondary" style="text-align: start;">
+                    <li><i class="fas fa-phone me-2"></i> {{contact.phone_number}}</li>
+                    <li><i class="fa-solid fa-envelope me-2"></i> {{contact.email}}</li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
@@ -75,7 +75,7 @@ Contact - Nusa Health Company
         <p class="lead mb-5 text-secondary text-center">
             <i>We are always available to assist you. Feel free to reach out on the location below.</i>
         </p>
-        <div id="map" class="w-100 mb-3" style="height: 500px;"></div>
+        <div id="map" class="w-75 mb-3 mx-auto d-block" style="height: 350px;"></div>
         <input type="hidden" id="latitude" value="{{location.latitude}}">
         <input type="hidden" id="longitude" value="{{location.longitude}}">
     </div>
