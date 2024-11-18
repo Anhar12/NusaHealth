@@ -392,6 +392,54 @@ def ContentManagement(request):
     return render(request, 'Dashboard/content-management.html', context)
 
 @admin_required()
+def ContactManagement(request):
+    logo_instance = Logo.objects.first()
+    contact = ContactSection.objects.first()
+    location = LocationSection.objects.first()
+
+    context = {
+        'section': 'contact-management',
+        'logo': logo_instance,
+        'contact': contact,
+        'location': location
+    }
+    return render(request, 'Dashboard/contact-management.html', context)
+
+@admin_required()
+def AboutManagement(request):
+    logo_instance = Logo.objects.first()
+    philosophy = PhilosphySection.objects.first()
+    vision_mission = VisionMissionSection.objects.first()
+    business_structure = BusinessStructure.objects.first()
+    solutions = SolutionsSection.objects.first()
+
+    context = {
+        'section': 'about-management',
+        'logo': logo_instance,
+        'philosophy': philosophy,
+        'vision_mission': vision_mission,
+        'business_structure': business_structure,
+        'solutions': solutions,
+    }
+    return render(request, 'Dashboard/about-management.html', context)
+
+@admin_required()
+def HomeManagement(request):
+    logo_instance = Logo.objects.first()
+    image_slider = ImageSlider.objects.first()
+    hero = HeroSection.objects.first()
+    services = ServiceSection.objects.first()
+
+    context = {
+        'logo': logo_instance,
+        'section': 'home-management',
+        'slider': image_slider,
+        'hero': hero,
+        'services': services,
+    }
+    return render(request, 'Dashboard/home-management.html', context)
+
+@admin_required()
 def UploadLogo(request):
     if request.method == 'POST':
         logo_instance = Logo.objects.first() or Logo()

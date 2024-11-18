@@ -22,6 +22,9 @@ urlpatterns = [
     path('dashboard/activities-management/delete/<int:activity_id>', views.ActivitiesManagementDelete, name='activities-management-delete'),
     
     path('dashboard/content-management', views.ContentManagement, name='content-management'),
+    path('dashboard/home-management', views.HomeManagement, name='home-management'),
+    path('dashboard/about-management', views.AboutManagement, name='about-management'),
+    path('dashboard/contact-management', views.ContactManagement, name='contact-management'),
     path('dashboard/upload-logo', views.UploadLogo, name='upload-logo'),
     path('dashboard/upload-slider', views.UploadSlider, name='upload-slider'),
     path('dashboard/upload-hero', views.UploadHero, name='upload-hero'),

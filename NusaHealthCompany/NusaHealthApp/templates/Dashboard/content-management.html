@@ -5,6 +5,9 @@ Content Management - Nusa Health Company
 {% endblock %}
 
 {% block content %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <div class="container pb-3">
     <div class="w-100 py-3">
         <h4 class="text-center fw-bold">Web Content Management</h4>
@@ -563,11 +566,11 @@ Content Management - Nusa Health Company
                     <div class="row mb-3">
                         <div class="col-md-6 mb-3">
                             <label for="latitude" class="">Latitude</label>
-                            <input type="text" class="form-control" id="latitude" readonly name="latitude" value="{{ location.latitude|default:'' }}">
+                            <input type="text" class="form-control" id="latitude" readonly name="latitude" value="{{ location.latitude|default:'-0.467248' }}">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="longitude" class="">Longitude</label>
-                            <input type="text" class="form-control" id="longitude" readonly name="longitude" value="{{ location.longitude|default:'' }}">
+                            <input type="text" class="form-control" id="longitude" readonly name="longitude" value="{{ location.longitude|default:'117.157774' }}">
                         </div>
                     </div>                    
                     
@@ -582,9 +585,6 @@ Content Management - Nusa Health Company
 </div>
 
 {% include 'loading-spinner.html' %}
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -734,29 +734,37 @@ Content Management - Nusa Health Company
             });
         }
 
-        let latitude = $('#latitude').val();
-        let longitude = $('#longitude').val();
+        let latitude = parseFloat($('#latitude').val());
+        let longitude = parseFloat($('#longitude').val());
 
-        const map = L.map('map').setView([latitude, longitude], 12);
-        
+        const lokasiAwal = [latitude, longitude];
+
+        const map = L.map('map').setView(lokasiAwal, 13);
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19
-        }).addTo(map);
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors',
+        }).addTo(map);       
 
-        //let marker = L.marker([]).addTo(map);
+        let marker = L.marker(lokasiAwal, { draggable: true }).addTo(map);
 
-        map.on('click', function(e) {
-            const { lat, lng } = e.latlng;
+        function updateLatLng(lat, lng) {
+            $('#latitude').val(lat.toFixed(6));
+            $('#longitude').val(lng.toFixed(6));
+        }
 
-            if (marker) {
-                map.removeLayer(marker);
-            }
-
-            marker = L.marker([lat, lng]).addTo(map);
-            
-            $('#latitude').val(lat);
-            $('#longitude').val(lng);
+        marker.on('dragend', function () {
+            const { lat, lng } = marker.getLatLng();
+            updateLatLng(lat, lng);
         });
+
+        map.on('click', function (e) {
+            const { lat, lng } = e.latlng;
+            marker.setLatLng([lat, lng]);
+            updateLatLng(lat, lng);
+        });
+
+        updateLatLng(lokasiAwal[0], lokasiAwal[1]);
 
         $('#logoForm').on('submit', function(event) {
             event.preventDefault();

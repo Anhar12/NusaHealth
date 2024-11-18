@@ -5,6 +5,8 @@ Contact - Nusa Health Company
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <!-- Contact start -->
 <section id="contact-us" class="pb-5 pt-4">
@@ -76,8 +78,8 @@ Contact - Nusa Health Company
             <i>We are always available to assist you. Feel free to reach out on the location below.</i>
         </p>
         <div id="map" class="w-75 mb-3 mx-auto d-block" style="height: 350px;"></div>
-        <input type="hidden" id="latitude" value="{{location.latitude}}">
-        <input type="hidden" id="longitude" value="{{location.longitude}}">
+        <input type="hidden" id="latitude" value="{{location.latitude|default:'-0.467248'}}">
+        <input type="hidden" id="longitude" value="{{location.longitude|default:'117.157774'}}">
     </div>
 </section>
 <!-- Location end -->
@@ -85,14 +87,21 @@ Contact - Nusa Health Company
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
     $(document).ready(function() {
+        let latitude = parseFloat($('#latitude').val());
+        let longitude = parseFloat($('#longitude').val());
+        const lokasi = [latitude, longitude];
 
-        const map = L.map('map').setView([$('#latitude').val(), $('#longitude').val()], 15);
-            
+        const map = L.map('map').setView(lokasi, 13);
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19
-        }).addTo(map);
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors',
+        }).addTo(map);        
 
-        let marker = L.marker([$('#latitude').val(), $('#longitude').val()]).addTo(map);
+        L.marker(lokasi)
+            .addTo(map)
+            .bindPopup('<b>NusaHealth Company</b>')
+            .openPopup();
     });
 </script>
 
