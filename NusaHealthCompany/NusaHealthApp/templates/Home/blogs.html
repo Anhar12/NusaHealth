@@ -17,28 +17,28 @@ Blogs - Nusa Health Company
 
             <div class="w-100 row rounded bg-white overflow-hidden shadow-card border border-primary mx-2 mb-5 " style="height: 350px;">
                 <div class="col-md-6 p-0">
-                    <img src="{{ blogs.first.image.url }}" alt="blogs.first.title" class="w-100" style="object-fit: cover; height: 350px;">
+                    <img src="{{ firs_blog.image.url }}" alt="firs_blog.title" class="w-100" style="object-fit: cover; height: 350px;">
                 </div>
                 <div class="col-md-6 px-3 py-4">
                     <div class="border-bottom">
                         <a href="#" class="text-decoration-none">
                             <h4 class="text-primary fw-semibold text-truncate-2" style="height: 60px;">
-                                {{ blogs.first.title }}
+                                {{ firs_blog.title }}
                             </h4>
                         </a>
                         <p class="text-secondary text-truncate-6" style="height: 145px;">
-                            {{ blogs.first.body }}
+                            {{ firs_blog.body }}
                         </p>
                     </div>
 
                     <div class="px-3 py-4 row justify-content-between align-items-center overflow-hidden" style="height: 80px;">
                         <div class="d-flex flex-wrap gap-2 col-8 p-0">
-                            <span class="bg-primary text-white rounded py-1 px-3">{{ blogs.first.category }}</span>
+                            <span class="bg-primary text-white rounded py-1 px-3">{{ firs_blog.category }}</span>
                         </div>
 
                         <div class="col-4 p-0">
                             <p class="m-0 text-end">
-                                {{blogs.first.publish|date:"d, M Y"}}
+                                {{firs_blog.publish|date:"d, M Y"}}
                             </p>
                         </div>
                     </div>
@@ -46,7 +46,7 @@ Blogs - Nusa Health Company
             </div>
 
             <div class="d-flex flex-column gap-2 align-items-center w-100">
-                <form method="GET" class="row container w-100 justify-content-between" autocomplete="off">
+                <form method="GET" class="row container w-100 justify-content-between m-0" autocomplete="off">
                     <input class="form-control" style="width: 95%;" type="search" name="q" placeholder="Search blogs" value="{{ query|default:'' }}" aria-label="Search">
                     <button class="btn btn-outline-primary px-2" style="width: 4%;" type="submit">
                         <i class="fas fa-search"></i>
@@ -74,7 +74,7 @@ Blogs - Nusa Health Company
                 <div class="row w-100 ">
                     {% for blog in blogs %}
                         <div class="col-md-4 p-2" style="cursor: pointer;">
-                            <div class="rounded shadow-btn bg-white overflow-hidden border border-primary">
+                            <div class="rounded shadow hover-scaleup bg-white overflow-hidden border">
                                 <img src="{{blog.image.url}}" class="w-100 m-0 border-bottom border-secondary" style="height: 200px; object-fit: cover;" alt="{{blog.title}}">
         
                                 <div class="my-2 mx-3 border-bottom">
@@ -101,6 +101,22 @@ Blogs - Nusa Health Company
                             </div>
                         </div>
                     {% endfor %}
+                </div>
+
+                <div class="pagination mt-3">
+                    <span class="d-flex gap-2 align-items-center">
+                        {% if blogs.has_previous %}
+                            <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page=1"><i class="fa-solid fa-angles-left"></i></a>
+                            <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page={{ blogs.previous_page_number }}"><i class="fa-solid fa-angle-left"></i></a>
+                        {% endif %}
+                
+                        <span>Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}</span>
+                
+                        {% if blogs.has_next %}
+                            <a class="text-primary fs-3 fw-bold ms-2 text-decoration-none" href="?page={{ blogs.next_page_number }}"><i class="fa-solid fa-angle-right"></i></a>
+                            <a class="text-primary fs-3 fw-bold ms-2 text-decoration-none" href="?page={{ blogs.paginator.num_pages }}"><i class="fa-solid fa-angles-right"></i></a>
+                        {% endif %}
+                    </span>
                 </div>
             </div>
         </div>

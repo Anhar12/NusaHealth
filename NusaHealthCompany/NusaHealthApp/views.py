@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 from .decorators import admin_required
 from .models import Logo, ImageSlider, HeroSection, ServiceSection, PhilosphySection, VisionMissionSection, BusinessStructure, SolutionsSection, ContactSection, LocationSection, Blogs, Activities
 from taggit.models import Tag
@@ -60,11 +61,16 @@ def Blog(request):
     blogs = Blogs.objects.all()
     categories = Blogs.CATEGORIES
     
+    paginator = Paginator(blogs, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
     context = {
         'section': 'blogs',
         'logo': logo_instance,
-        'blogs': blogs,
-        'categories': categories
+        'blogs': page_obj,
+        'firs_blog': blogs[0],
+        'categories': categories,
     }
     return render(request, 'Home/blogs.html', context)
 
@@ -72,10 +78,15 @@ def Activity(request):
     logo_instance = Logo.objects.first()
     activities = Activities.objects.all()
     
+    paginator = Paginator(activities, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
     context = {
         'section': 'activities',
         'logo': logo_instance,
-        'activities': activities
+        'activities': page_obj,
+        'activities_first': activities[0]
     }
     return render(request, 'Home/activities.html', context)
     
