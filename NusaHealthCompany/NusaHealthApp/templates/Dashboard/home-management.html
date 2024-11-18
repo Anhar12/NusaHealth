@@ -26,9 +26,9 @@ Home Management - Nusa Health Company
                         <div class="col-md-4 mb-3">
                             <label for="slider1" class="">Image Slider 1</label>
                             <input type="file" class="form-control" id="slider1" name="slider1">
-                            <img id="slider1Preview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="slider1Preview" class="preview mt-2 w-100" style="display: none;" />
                             {% if slider and slider.image1 %}
-                                <img id="slider1Now" src="{{ slider.image1.url }}" alt="Image Slider" class="now mt-2 w-100">
+                                <img loading="lazy" id="slider1Now" src="{{ slider.image1.url }}" alt="Image Slider" class="now mt-2 w-100">
                             {% else %}
                                 <p id="slider1Placeholder" class=" mt-2 text-muted">No image slider uploaded</p>
                             {% endif %}
@@ -37,9 +37,9 @@ Home Management - Nusa Health Company
                         <div class="col-md-4 mb-3">
                             <label for="slider2" class="">Image Slider 2</label>
                             <input type="file" class="form-control" id="slider2" name="slider2">
-                            <img id="slider2Preview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="slider2Preview" class="preview mt-2 w-100" style="display: none;" />
                             {% if slider and slider.image2 %}
-                                <img id="slider2Now" src="{{ slider.image2.url }}" alt="Image Slider" class="now mt-2 w-100">
+                                <img loading="lazy" id="slider2Now" src="{{ slider.image2.url }}" alt="Image Slider" class="now mt-2 w-100">
                             {% else %}
                                 <p id="slider2Placeholder" class=" mt-2 text-muted">No image slider uploaded</p>
                             {% endif %}
@@ -48,9 +48,9 @@ Home Management - Nusa Health Company
                         <div class="col-md-4 mb-3">
                             <label for="slider3" class="">Image Slider 3</label>
                             <input type="file" class="form-control" id="slider3" name="slider3">
-                            <img id="slider3Preview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="slider3Preview" class="preview mt-2 w-100" style="display: none;" />
                             {% if slider and slider.image3 %}
-                                <img id="slider3Now" src="{{ slider.image3.url }}" alt="Image Slider" class="now mt-2 w-100">
+                                <img loading="lazy" id="slider3Now" src="{{ slider.image3.url }}" alt="Image Slider" class="now mt-2 w-100">
                             {% else %}
                                 <p id="slider3Placeholder" class=" mt-2 text-muted">No image slider uploaded</p>
                             {% endif %}
@@ -59,9 +59,9 @@ Home Management - Nusa Health Company
                         <div class="col-md-4 mb-3">
                             <label for="slider4" class="">Image Slider 4</label>
                             <input type="file" class="form-control" id="slider4" name="slider4">
-                            <img id="slider4Preview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="slider4Preview" class="preview mt-2 w-100" style="display: none;" />
                             {% if slider and slider.image4 %}
-                                <img id="slider4Now" src="{{ slider.image4.url }}" alt="Image Slider" class="now mt-2 w-100">
+                                <img loading="lazy" id="slider4Now" src="{{ slider.image4.url }}" alt="Image Slider" class="now mt-2 w-100">
                             {% else %}
                                 <p id="slider4Placeholder" class=" mt-2 text-muted">No image slider uploaded</p>
                             {% endif %}
@@ -70,9 +70,9 @@ Home Management - Nusa Health Company
                         <div class="col-md-4 mb-3">
                             <label for="slider5" class="">Image Slider 5</label>
                             <input type="file" class="form-control" id="slider5" name="slider5">
-                            <img id="slider5Preview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="slider5Preview" class="preview mt-2 w-100" style="display: none;" />
                             {% if slider and slider.image5 %}
-                                <img id="slider5Now" src="{{ slider.image5.url }}" alt="Image Slider" class="now mt-2 w-100">
+                                <img loading="lazy" id="slider5Now" src="{{ slider.image5.url }}" alt="Image Slider" class="now mt-2 w-100">
                             {% else %}
                                 <p id="slider5Placeholder" class=" mt-2 text-muted">No image slider uploaded</p>
                             {% endif %}
@@ -101,9 +101,9 @@ Home Management - Nusa Health Company
                         <div class="col-md-6 mb-3">
                             <label for="hero_image" class="">Hero Image</label>
                             <input type="file" class="form-control" id="hero_image" name="hero_image">
-                            <img id="heroPreview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="heroPreview" class="preview mt-2 w-100" style="display: none;" />
                             {% if hero and hero.hero_image %}
-                                <img id="heroNow" src="{{ hero.hero_image.url }}" alt="Hero Image" class="now mt-2 w-100">
+                                <img loading="lazy" id="heroNow" src="{{ hero.hero_image.url }}" alt="Hero Image" class="now mt-2 w-100">
                             {% else %}
                                 <p id="heroPlaceholder" class="mt-2 text-muted">No hero image uploaded</p>
                             {% endif %}
@@ -140,9 +140,9 @@ Home Management - Nusa Health Company
                         <div class="col-md-6 mb-3">
                             <label for="service_image1" class="">Services Image 1</label>
                             <input type="file" class="form-control" id="service_image1" name="service_image1">
-                            <img id="service1Preview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="service1Preview" class="preview mt-2 w-100" style="display: none;" />
                             {% if services and services.service_image1 %}
-                                <img id="service1Now" src="{{ services.service_image1.url }}" alt="Service Image" class="now mt-2 w-100">
+                                <img loading="lazy" id="service1Now" src="{{ services.service_image1.url }}" alt="Service Image" class="now mt-2 w-100">
                             {% else %}
                                 <p id="service1Placeholder" class="mt-2 text-muted">No service image uploaded</p>
                             {% endif %}
@@ -167,9 +167,9 @@ Home Management - Nusa Health Company
                         <div class="col-md-6 mb-3">
                             <label for="service_image2" class="">Services Image 2</label>
                             <input type="file" class="form-control" id="service_image2" name="service_image2">
-                            <img id="service2Preview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="service2Preview" class="preview mt-2 w-100" style="display: none;" />
                             {% if services and services.service_image2 %}
-                                <img id="service2Now" src="{{ services.service_image2.url }}" alt="Service Image" class="now mt-2 w-100">
+                                <img loading="lazy" id="service2Now" src="{{ services.service_image2.url }}" alt="Service Image" class="now mt-2 w-100">
                             {% else %}
                                 <p id="service2Placeholder" class="mt-2 text-muted">No service image uploaded</p>
                             {% endif %}
@@ -194,9 +194,9 @@ Home Management - Nusa Health Company
                         <div class="col-md-6 mb-3">
                             <label for="service_image3" class="">Services Image 3</label>
                             <input type="file" class="form-control" id="service_image3" name="service_image3">
-                            <img id="service3Preview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="service3Preview" class="preview mt-2 w-100" style="display: none;" />
                             {% if services and services.service_image3 %}
-                                <img id="service3Now" src="{{ services.service_image3.url }}" alt="Service Image" class="now mt-2 w-100">
+                                <img loading="lazy" id="service3Now" src="{{ services.service_image3.url }}" alt="Service Image" class="now mt-2 w-100">
                             {% else %}
                                 <p id="service3Placeholder" class="mt-2 text-muted">No service image uploaded</p>
                             {% endif %}
@@ -260,17 +260,28 @@ Home Management - Nusa Health Company
                 confirmButtonColor: '#dc3545',
             });
         }
+        
+        function onLoading() {
+            $('#loading').removeClass('d-none');
+            $('.overlay').removeClass('d-none');
+        }
+
+        function onLoaded() {
+            $('#loading').addClass('d-none');
+            $('.overlay').addClass('d-none');
+        }
 
         function buttonEvent(btn, formContainer, formInput) {
             var formElem = $('#' + formContainer);
             var iconElem = $('#' + btn + 'Icon');
             var btnElem = $('#' + btn);
-
+            
             formElem.addClass('d-none').hide();
             iconElem.removeClass('rotate-down');
             btnElem.removeClass('text-primary');
-
+            
             btnElem.on('click', function() {
+                
                 if (formElem.hasClass('d-none')) {
                     formElem.removeClass('d-none').stop(true, true).slideDown(300);
                     iconElem.addClass('rotate-down');
@@ -297,16 +308,6 @@ Home Management - Nusa Health Company
                 $('.now').show();
                 cleanTextArea();
             });
-        }
-
-        function onLoading() {
-            $('#loading').removeClass('d-none');
-            $('.overlay').removeClass('d-none');
-        }
-
-        function onLoaded() {
-            $('#loading').addClass('d-none');
-            $('.overlay').addClass('d-none');
         }
 
         buttonEvent('sliderManagementBtn', 'sliderFormContainer', 'sliderForm');

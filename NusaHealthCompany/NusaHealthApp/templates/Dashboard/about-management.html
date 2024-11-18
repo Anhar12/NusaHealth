@@ -26,9 +26,9 @@ About Management - Nusa Health Company
                         <div class="col-md-6 mb-3">
                             <label for="philosophy_image" class="">Philosophy Image</label>
                             <input type="file" class="form-control" id="philosophy_image" name="philosophy_image">
-                            <img id="philosophyPreview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="philosophyPreview" class="preview mt-2 w-100" style="display: none;" />
                             {% if philosophy and philosophy.philosophy_image %}
-                                <img id="philosophyNow" src="{{ philosophy.philosophy_image.url }}" alt="philosophy Image" class="now mt-2 w-100">
+                                <img loading="lazy" id="philosophyNow" src="{{ philosophy.philosophy_image.url }}" alt="philosophy Image" class="now mt-2 w-100">
                             {% else %}
                                 <p id="philosophyPlaceholder" class="mt-2 text-muted">No Philosophy image uploaded</p>
                             {% endif %}
@@ -105,9 +105,9 @@ About Management - Nusa Health Company
 
                             <label for="business1" class="">CEO Image</label>
                             <input type="file" class="form-control" id="business1" name="business1">
-                            <img id="business1Preview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="business1Preview" class="preview mt-2 w-100" style="display: none;" />
                             {% if business_structure and business_structure.image_ceo %}
-                                <img id="business1Now" src="{{ business_structure.image_ceo.url }}" alt="Image Slider" class="now mt-2 w-100">
+                                <img loading="lazy" id="business1Now" src="{{ business_structure.image_ceo.url }}" alt="Image Slider" class="now mt-2 w-100">
                             {% else %}
                                 <p id="business1Placeholder" class=" mt-2 text-muted">No image CEO uploaded</p>
                             {% endif %}
@@ -119,9 +119,9 @@ About Management - Nusa Health Company
 
                             <label for="business2" class="">COO Image</label>
                             <input type="file" class="form-control" id="business2" name="business2">
-                            <img id="business2Preview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="business2Preview" class="preview mt-2 w-100" style="display: none;" />
                             {% if business_structure and business_structure.image_coo %}
-                                <img id="business2Now" src="{{ business_structure.image_coo.url }}" alt="Image Slider" class="now mt-2 w-100">
+                                <img loading="lazy" id="business2Now" src="{{ business_structure.image_coo.url }}" alt="Image Slider" class="now mt-2 w-100">
                             {% else %}
                                 <p id="business2Placeholder" class=" mt-2 text-muted">No image COO uploaded</p>
                             {% endif %}
@@ -133,9 +133,9 @@ About Management - Nusa Health Company
 
                             <label for="business3" class="">CFO Image</label>
                             <input type="file" class="form-control" id="business3" name="business3">
-                            <img id="business3Preview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="business3Preview" class="preview mt-2 w-100" style="display: none;" />
                             {% if business_structure and business_structure.image_cfo %}
-                                <img id="business3Now" src="{{ business_structure.image_cfo.url }}" alt="Image Slider" class="now mt-2 w-100">
+                                <img loading="lazy" id="business3Now" src="{{ business_structure.image_cfo.url }}" alt="Image Slider" class="now mt-2 w-100">
                             {% else %}
                                 <p id="business3Placeholder" class=" mt-2 text-muted">No image CFO uploaded</p>
                             {% endif %}
@@ -147,9 +147,9 @@ About Management - Nusa Health Company
 
                             <label for="business4" class="">CTO Image</label>
                             <input type="file" class="form-control" id="business4" name="business4">
-                            <img id="business4Preview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="business4Preview" class="preview mt-2 w-100" style="display: none;" />
                             {% if business_structure and business_structure.image_cto %}
-                                <img id="business4Now" src="{{ business_structure.image_cto.url }}" alt="Image Slider" class="now mt-2 w-100">
+                                <img loading="lazy" id="business4Now" src="{{ business_structure.image_cto.url }}" alt="Image Slider" class="now mt-2 w-100">
                             {% else %}
                                 <p id="business4Placeholder" class=" mt-2 text-muted">No image CTO uploaded</p>
                             {% endif %}
@@ -161,9 +161,9 @@ About Management - Nusa Health Company
 
                             <label for="business5" class="">CMO Image</label>
                             <input type="file" class="form-control" id="business5" name="business5">
-                            <img id="business5Preview" class="preview mt-2 w-100" style="display: none;" />
+                            <img loading="lazy" id="business5Preview" class="preview mt-2 w-100" style="display: none;" />
                             {% if business_structure and business_structure.image_cmo %}
-                                <img id="business5Now" src="{{ business_structure.image_cmo.url }}" alt="Image Slider" class="now mt-2 w-100">
+                                <img loading="lazy" id="business5Now" src="{{ business_structure.image_cmo.url }}" alt="Image Slider" class="now mt-2 w-100">
                             {% else %}
                                 <p id="business5Placeholder" class=" mt-2 text-muted">No image CMO uploaded</p>
                             {% endif %}
