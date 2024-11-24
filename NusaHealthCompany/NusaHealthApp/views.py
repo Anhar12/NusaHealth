@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 from .decorators import admin_required
 from .models import Logo, ImageSlider, HeroSection, ServiceSection, PhilosphySection, VisionMissionSection, BusinessStructure, SolutionsSection, ContactSection, LocationSection, Blogs, Activities
 from taggit.models import Tag
@@ -79,14 +80,18 @@ def Blog(request):
 
     categories = Blogs.CATEGORIES  # Ambil kategori dari model
 
+    paginator = Paginator(blogs, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
     context = {
         'section': 'blogs',
         'logo': logo_instance,
-        'blogs': blogs,  # Semua blog (termasuk hasil pencarian dan kategori)
-        'latest_blog': latest_blog,  # Blog terbaru
+        'blogs': page_obj,
+        'latest_blog': latest_blog,
         'categories': categories,
-        'query': query,  # Menyimpan query untuk ditampilkan kembali di template
-        'selected_category': category_filter,  # Menyimpan kategori yang sedang dipilih
+        'query': query,
+        'selected_category': category_filter,
     }
     return render(request, 'Home/blogs.html', context)
 
@@ -115,16 +120,21 @@ def Activity(request):
     if query:
         activities = activities.filter(title__icontains=query)
     
+    paginator = Paginator(activities, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
     context = {
         'section': 'activities',
         'logo': logo_instance,
-        'activities': activities,
+        'activities': page_obj,
         'latest_activity': latest_activity,
         'query': query,  # Pass the query to the template for the search box
     }
     
     return render(request, 'Home/activities.html', context)
 
+<<<<<<< HEAD
 def ActivityDetail(request):
     logo_instance = Logo.objects.first()
     
@@ -136,6 +146,8 @@ def ActivityDetail(request):
     return render(request, 'Home/detail-activities.html', context)
 
     
+=======
+>>>>>>> 089a6cc473503165b5e1f5a9a20fab9cc1c5132c
 def Contact(request):
     logo_instance = Logo.objects.first()
     contact = ContactSection.objects.first()
@@ -211,17 +223,20 @@ def BlogsManagement(request):
 
     # Ambil daftar kategori dari model
     categories = Blogs.CATEGORIES
+    
+    paginator = Paginator(blogs, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     context = {
         'section': 'blogs-management',
         'logo': logo_instance,
-        'blogs': blogs,  # Queryset terisi, baik kosong maupun dengan hasil
+        'blogs': page_obj,  # Queryset terisi, baik kosong maupun dengan hasil
         'categories': categories,
         'query': query,  # Menyertakan query untuk menjaga nilai pencarian di input
         'selected_category': category_filter,  # Menyertakan kategori yang terpilih
     }
     return render(request, 'Dashboard/blogs-management.html', context)
-
 
 @admin_required()
 def BlogsManagementAdd(request):
@@ -244,7 +259,6 @@ def BlogsManagementAdd(request):
         'form': BlogForm()
     }
     return render(request, 'Dashboard/blogs-management-form.html', context)
-
 
 @admin_required()
 def BlogsManagementUpdate(request, blog_id):
@@ -299,10 +313,14 @@ def ActivitiesManagement(request):
         # Filter berdasarkan judul jika query ada
         activities = activities.filter(title__icontains=query)
 
+    paginator = Paginator(activities, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
     context = {
         'section': 'activities-management',
         'logo': logo_instance,
-        'activities': activities,
+        'activities': page_obj,
         'query': query,
     }
     return render(request, 'Dashboard/activities-management.html', context)
@@ -397,6 +415,7 @@ def ContentManagement(request):
     return render(request, 'Dashboard/content-management.html', context)
 
 @admin_required()
+<<<<<<< HEAD
 def LogosManagement(request):
     logo_instance = Logo.objects.first()
 
@@ -415,6 +434,54 @@ def ImageSliderManagement(request):
         'slider': image_slider,
     }
     return render(request, 'Dashboard/ImageSlider-management.html', context)
+=======
+def ContactManagement(request):
+    logo_instance = Logo.objects.first()
+    contact = ContactSection.objects.first()
+    location = LocationSection.objects.first()
+
+    context = {
+        'section': 'contact-management',
+        'logo': logo_instance,
+        'contact': contact,
+        'location': location
+    }
+    return render(request, 'Dashboard/contact-management.html', context)
+
+@admin_required()
+def AboutManagement(request):
+    logo_instance = Logo.objects.first()
+    philosophy = PhilosphySection.objects.first()
+    vision_mission = VisionMissionSection.objects.first()
+    business_structure = BusinessStructure.objects.first()
+    solutions = SolutionsSection.objects.first()
+
+    context = {
+        'section': 'about-management',
+        'logo': logo_instance,
+        'philosophy': philosophy,
+        'vision_mission': vision_mission,
+        'business_structure': business_structure,
+        'solutions': solutions,
+    }
+    return render(request, 'Dashboard/about-management.html', context)
+
+@admin_required()
+def HomeManagement(request):
+    logo_instance = Logo.objects.first()
+    image_slider = ImageSlider.objects.first()
+    hero = HeroSection.objects.first()
+    services = ServiceSection.objects.first()
+
+    context = {
+        'logo': logo_instance,
+        'section': 'home-management',
+        'slider': image_slider,
+        'hero': hero,
+        'services': services,
+    }
+    return render(request, 'Dashboard/home-management.html', context)
+>>>>>>> 089a6cc473503165b5e1f5a9a20fab9cc1c5132c
 
 @admin_required()
 def UploadLogo(request):

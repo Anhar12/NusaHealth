@@ -123,17 +123,17 @@ class Blogs(models.Model):
         ('published', 'Published'),
     )
     CATEGORIES = (
-        ('technology', 'Technology'),
-        ('sports', 'Sports'),
-        ('health', 'Health'),
-        ('science', 'Science'),
-        ('services', 'Services'),
-        ('news', 'News'),
-        ('diseases', 'Diseases'),
-        ('events', 'Events'),
-        ('education', 'Education'),
-        ('lifestyle', 'LifeStyle'),
-        ('medicine', 'Medicine'),
+        ('Technology', 'Technology'),
+        ('Sports', 'Sports'),
+        ('Health', 'Health'),
+        ('Science', 'Science'),
+        ('Services', 'Services'),
+        ('News', 'News'),
+        ('Diseases', 'Diseases'),
+        ('Events', 'Events'),
+        ('Education', 'Education'),
+        ('LifeStyle', 'LifeStyle'),
+        ('Medicine', 'Medicine'),
     )
     title = models.CharField(max_length=250)
     body = models.TextField()

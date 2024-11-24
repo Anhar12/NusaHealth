@@ -27,19 +27,19 @@ Activities Management - Nusa Health Company
         <div id="latest-activity" class="container py-3">
             <div class="d-flex w-100 justify-content-between border-bottom py-2">
                 <h4 class="fw-bold w-25">Latest Activities</h4>
-                {% if latest_activity %}
-                <div class="rounded shadow bg-white overflow-hidden border p-2 d-flex align-items-center gap-3" style="max-height: 150px;">
-                    <img src="{{ latest_activity.image.url }}" alt="{{ latest_activity.title }}" 
-                         class="rounded" style="width: 100px; height: 100px; object-fit: cover;">
-                    <div class="flex-grow-1">
-                        <h5 class="fw-bold mb-1 text-truncate">{{ latest_activity.title }}</h5>
-                        <p class="text-secondary fs-small text-truncate-2 m-0">{{ latest_activity.body }}</p>
-                        <p class="text-muted m-0" style="font-size: 12px;">Published: {{ latest_activity.publish|date:"d, M Y" }}</p>
+                <!-- {% if latest_activity %}
+                    <div class="rounded shadow bg-white overflow-hidden border p-2 d-flex align-items-center gap-3" style="max-height: 150px;">
+                        <img src="{{ latest_activity.image.url }}" alt="{{ latest_activity.title }}" 
+                            class="rounded" style="width: 100px; height: 100px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                            <h5 class="fw-bold mb-1 text-truncate">{{ latest_activity.title }}</h5>
+                            <p class="text-secondary fs-small text-truncate-2 m-0">{{ latest_activity.body }}</p>
+                            <p class="text-muted m-0" style="font-size: 12px;">Published: {{ latest_activity.publish|date:"d, M Y" }}</p>
+                        </div>
                     </div>
-                </div>
                 {% else %}
-                <p class="text-muted">No latest activities available.</p>
-                {% endif %}
+                    <p class="text-muted">No latest activities available.</p>
+                {% endif %} -->
             </div>
         </div>
 
@@ -77,6 +77,21 @@ Activities Management - Nusa Health Company
                     </div>
                 </div>
                 {% endfor %}
+                <div class="w-100 d-flex justify-content-center mt-3">
+                    <span class="d-flex gap-2 align-items-center">
+                        {% if activities.has_previous %}
+                            <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page=1"><i class="fa-solid fa-angles-left"></i></a>
+                            <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page={{ activities.previous_page_number }}"><i class="fa-solid fa-angle-left"></i></a>
+                        {% endif %}
+                
+                        <span>Page {{ activities.number }} of {{ activities.paginator.num_pages }}</span>
+                
+                        {% if activities.has_next %}
+                            <a class="text-primary fs-3 fw-bold ms-2 text-decoration-none" href="?page={{ activities.next_page_number }}"><i class="fa-solid fa-angle-right"></i></a>
+                            <a class="text-primary fs-3 fw-bold ms-2 text-decoration-none" href="?page={{ activities.paginator.num_pages }}"><i class="fa-solid fa-angles-right"></i></a>
+                        {% endif %}
+                    </span>
+                </div>
             {% else %}
             <div class="alert alert-warning text-center w-100">
                 No activities found.

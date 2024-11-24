@@ -9,7 +9,7 @@ Activities - Nusa Health Company
 <!-- Activities start -->
 <section id="latest_activity" class="container py-5">
     {% if latest_activity %}
-    <div class="container py-2">
+    <div class="container">
         <h1 class="text-center fw-bold text-primary">NusaHealth's Activities</h1>
         <p class="lead mb-4 text-secondary text-center">
             <i>Every NusaHealth activity aims to provide you with practical knowledge that can be applied in everyday life.</i>
@@ -46,8 +46,8 @@ Activities - Nusa Health Company
 </section>
 
 <!-- Search Bar and Latest Activities -->
-<section id="search-activities" class="py-5">
-    <div class="container py-3">
+<section id="search-activities" class="pb-5">
+    <div class="container">
         <!-- SEARCH -->
         <div class="d-flex w-100 justify-content-between align-items-center border-bottom py-2">
             <h4 class="fw-bold w-25">Latest Activities</h4>
@@ -87,6 +87,21 @@ Activities - Nusa Health Company
                 </div>
             </div>
             {% endfor %}
+        </div>
+        <div class="pagination mt-3">
+            <span class="d-flex gap-2 align-items-center">
+                {% if activities.has_previous %}
+                    <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page=1"><i class="fa-solid fa-angles-left"></i></a>
+                    <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page={{ activities.previous_page_number }}"><i class="fa-solid fa-angle-left"></i></a>
+                {% endif %}
+        
+                <span>Page {{ activities.number }} of {{ activities.paginator.num_pages }}</span>
+        
+                {% if activities.has_next %}
+                    <a class="text-primary fs-3 fw-bold ms-2 text-decoration-none" href="?page={{ activities.next_page_number }}"><i class="fa-solid fa-angle-right"></i></a>
+                    <a class="text-primary fs-3 fw-bold ms-2 text-decoration-none" href="?page={{ activities.paginator.num_pages }}"><i class="fa-solid fa-angles-right"></i></a>
+                {% endif %}
+            </span>
         </div>
         {% else %}
         <div class="alert alert-warning text-center" role="alert">

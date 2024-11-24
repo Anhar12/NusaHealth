@@ -47,6 +47,22 @@ Blogs - Nusa Health Company
                         </p>
                     </div>
                 </div>
+
+                <div class="pagination mt-3">
+                    <span class="d-flex gap-2 align-items-center">
+                        {% if blogs.has_previous %}
+                            <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page=1"><i class="fa-solid fa-angles-left"></i></a>
+                            <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page={{ blogs.previous_page_number }}"><i class="fa-solid fa-angle-left"></i></a>
+                        {% endif %}
+                
+                        <span>Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}</span>
+                
+                        {% if blogs.has_next %}
+                            <a class="text-primary fs-3 fw-bold ms-2 text-decoration-none" href="?page={{ blogs.next_page_number }}"><i class="fa-solid fa-angle-right"></i></a>
+                            <a class="text-primary fs-3 fw-bold ms-2 text-decoration-none" href="?page={{ blogs.paginator.num_pages }}"><i class="fa-solid fa-angles-right"></i></a>
+                        {% endif %}
+                    </span>
+                </div>
             </div>
         </div>
     </div>
@@ -55,8 +71,8 @@ Blogs - Nusa Health Company
 </section>
 
 <!-- Search and Latest Blogs -->
-<section id="search-blogs" class="py-5">
-    <div class="container pt-2">
+<section id="search-blogs" class="pb-5">
+    <div class="container">
         <!-- SEARCH -->
         <div class="d-flex flex-column gap-2 align-items-center w-100">
             <form method="GET" class="row container w-100 justify-content-between" autocomplete="off">
@@ -73,12 +89,11 @@ Blogs - Nusa Health Company
                     <h4 class="fw-bold w-25">Latest Blogs</h4>
                     <div class="row d-flex w-75 justify-content-end flex-wrap">
                         {% for category_value, category_name in categories %}
-                        <a href="?category={{ category_value }}&q={{ query|default:'' }}" class="btn btn-outline-primary btn-sm col-md-2 me-2 mb-2 {% if category_value == selected_category %}active{% endif %} 
+                        <a href="?category={{ category_value }}&q={{ query|default:'' }}" class="btn btn-sm col-md-2 me-2 mb-2 {% if category_value == selected_category %}btn-primary{% else %}btn-outline-primary{% endif %} 
                            {% if forloop.counter > 4 %}d-none category{% endif %}">
                             {{ category_name }}
                         </a>
                         {% endfor %}
-
 
                         <button id="show-all-btn" class="btn btn-primary btn-sm col-md-2 mb-2">Show All</button>
                         <button id="show-less-btn" class="btn btn-secondary btn-sm col-md-2 mb-2 d-none">Show Less</button>
@@ -86,7 +101,6 @@ Blogs - Nusa Health Company
                 </div>
             </div>
 
-            <!-- Tampilkan blog jika ada, atau tampilkan pesan "No blogs found" -->
             {% if blogs %}
             <div class="row w-100">
                 {% for blog in blogs %}
@@ -108,8 +122,7 @@ Blogs - Nusa Health Company
                         <div class="m-3 row justify-content-between align-items-center overflow-hidden"
                             style="height: 35px;">
                             <div class="d-flex flex-wrap gap-2 col-8 p-0">
-                                <span class="bg-primary text-white rounded fs-small py-1 px-3">{{ blog.category
-                                    }}</span>
+                                <span class="bg-primary text-white rounded fs-small py-1 px-3">{{ blog.category }}</span>
                             </div>
 
                             <div class="col-4 p-0">
@@ -121,6 +134,21 @@ Blogs - Nusa Health Company
                     </div>
                 </div>
                 {% endfor %}
+            </div>
+            <div class="pagination mt-3">
+                <span class="d-flex gap-2 align-items-center">
+                    {% if blogs.has_previous %}
+                        <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page=1"><i class="fa-solid fa-angles-left"></i></a>
+                        <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page={{ blogs.previous_page_number }}"><i class="fa-solid fa-angle-left"></i></a>
+                    {% endif %}
+            
+                    <span>Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}</span>
+            
+                    {% if blogs.has_next %}
+                        <a class="text-primary fs-3 fw-bold ms-2 text-decoration-none" href="?page={{ blogs.next_page_number }}"><i class="fa-solid fa-angle-right"></i></a>
+                        <a class="text-primary fs-3 fw-bold ms-2 text-decoration-none" href="?page={{ blogs.paginator.num_pages }}"><i class="fa-solid fa-angles-right"></i></a>
+                    {% endif %}
+                </span>
             </div>
             {% else %}
             <div class="alert alert-warning text-center w-100">
