@@ -95,12 +95,26 @@ def Blog(request):
     }
     return render(request, 'Home/blogs.html', context)
 
-def BlogDetail(request):
+# def BlogDetail(request):
+#     logo_instance = Logo.objects.first()
+
+#     context = {
+#         'section': 'blogs',
+#         'logo': logo_instance,
+#     }
+#     return render(request, 'Home/detail-blogs.html', context)
+
+def BlogDetail(request, blog_id):
+    # Fetch the logo instance
     logo_instance = Logo.objects.first()
+    
+    # Retrieve the specific blog using the provided blog_id
+    blog = get_object_or_404(Blogs, id=blog_id, status='published')
 
     context = {
         'section': 'blogs',
         'logo': logo_instance,
+        'blog': blog,  # Pass the blog object to the template
     }
     return render(request, 'Home/detail-blogs.html', context)
 
@@ -134,12 +148,26 @@ def Activity(request):
     
     return render(request, 'Home/activities.html', context)
 
-def ActivityDetail(request):
+# def ActivityDetail(request):
+#     logo_instance = Logo.objects.first()
+    
+#     context = {
+#         'section': 'activities',
+#         'logo': logo_instance,
+#     }
+    
+#     return render(request, 'Home/detail-activities.html', context)
+
+def ActivityDetail(request, activity_id):
     logo_instance = Logo.objects.first()
+    activity = get_object_or_404(Activities, id=activity_id)
+    related_activities = Activities.objects.filter(status='published').exclude(id=activity_id)[:3]
     
     context = {
         'section': 'activities',
         'logo': logo_instance,
+        'activity': activity,
+        'related_activities': related_activities,
     }
     
     return render(request, 'Home/detail-activities.html', context)

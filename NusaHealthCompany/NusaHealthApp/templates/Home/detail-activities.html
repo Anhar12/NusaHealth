@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Detail Blogs - Nusa Health Company
+  {{ activity.title }} - Nusa Health Company
 {% endblock %}
 
 {% block content %}
@@ -9,75 +9,83 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-lg-8">
-          <h1 class="text-primary fw-bold mb-4">Helping Hands: Supporting the Homeless with Healthcare</h1>
-          <img src="https://via.placeholder.com/750x300" class="img-fluid article-image mb-4" alt="Vaccination" />
+          <!-- Activity Title -->
+          <h1 class="text-primary fw-bold mb-4">{{ activity.title }}</h1>
+          
+          <!-- Activity Image -->
+          <img src="{{ activity.image.url }}" class="img-fluid article-image mb-4" alt="{{ activity.title }}" />
+
+          <!-- Activity Content -->
           <div class="content text-justify me-5">
-            <p>This month, we’re excited to share an update on one of our special projects: bringing healthcare to our homeless neighbors. Each week, our staff and volunteers have been setting up pop-up clinics in various parts of the city to provide free medical services, basic health check-ups, and essential supplies for those in need.</p>
-            <p>From treating minor illnesses to giving flu shots, our goal is to help bridge the gap for people who may not have easy access to healthcare. We believe that everyone deserves quality medical care, and seeing the impact of these efforts has been incredibly rewarding for our team.</p>
-            <p>Thank you to our staff and volunteers for their dedication, and to our community partners who help make this initiative possible. We’re looking forward to continuing these clinics and providing as much support as we can!</p>
+            <p>{{ activity.body }}</p>
           </div>
+
+          <!-- Pagination (Optional if applicable) -->
+          {% if previous_activity or next_activity %}
           <div class="pagination mt-4">
-            <a href="#" class="btn btn-outline-primary me-2">Previous</a>
-            <a href="#" class="btn btn-primary me-2">1</a>
-            <a href="#" class="btn btn-outline-primary me-2">2</a>
-            <a href="#" class="btn btn-outline-primary">3</a>
-            <a href="#" class="btn btn-outline-primary ms-2">Next</a>
+            {% if previous_activity %}
+              <a href="{% url 'detail-activities' previous_activity.id %}" class="btn btn-outline-primary me-2">Previous</a>
+            {% endif %}
+            {% if next_activity %}
+              <a href="{% url 'detail-activities' next_activity.id %}" class="btn btn-outline-primary ms-2">Next</a>
+            {% endif %}
           </div>
+          {% endif %}
+
           <!-- Share this -->
           <div class="text-start mt-4 mb-4">
             <p class="text-primary mb-2">Share this</p>
-            <a href="#" class="text-primary me-3"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="text-primary me-3"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="text-primary"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="text-primary me-3">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ activity.title }}" target="_blank" class="text-primary me-3">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?url={{ request.build_absolute_uri }}&title={{ activity.title }}" target="_blank" class="text-primary">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
           </div>
         </div>
 
-        <!-- Table of Contents -->
+        <!-- Related Activities -->
         <div class="col-lg-4 ms-md-auto table-of-contents">
-          <h4 class="text-primary">Table of Contents</h4>
+          <h4 class="text-primary">Related Activities</h4>
 
           <!-- Search Box -->
           <div class="search-box">
-            <form class="d-flex mb-2" role="search">
-              <input class="form-control me-2 w-auto" type="search" placeholder="Search topics..." aria-label="Search" />
+            <form class="d-flex mb-2" method="GET" action="{% url 'activities' %}">
+              <input class="form-control me-2 w-auto" type="search" name="q" placeholder="Search activities..." value="{{ query|default:'' }}" aria-label="Search" />
               <button class="btn btn-primary" type="submit">Search</button>
             </form>
           </div>
+
+          <!-- Related Activities List -->
           <ul class="list-unstyled">
-            <li><a href="#" class="text-primary text-decoration-none">Exploring the Daily Dose...</a></li>
-            <li><a href="#" class="text-primary text-decoration-none">How to Make the Most...</a></li>
-            <li><a href="#" class="text-primary text-decoration-none">More Topics...</a></li>
+            {% for related_activity in related_activities %}
+            <li>
+              <a href="{% url 'detail-activities' related_activity.id %}" class="text-primary text-decoration-none">
+                {{ related_activity.title }}
+              </a>
+            </li>
+            {% endfor %}
           </ul>
 
-          <!-- Card 1 -->
+          <!-- Example Card for Related Activities -->
+          {% for related_activity in related_activities %}
           <div class="card mb-4" style="max-width: 250px; border-radius: 10px; overflow: hidden;">
-            <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Content Image" />
+            <a href="{% url 'detail-activities' related_activity.id %}">
+              <img src="{{ related_activity.image.url }}" class="card-img-top" alt="{{ related_activity.title }}" />
+            </a>
             <div class="card-body p-2">
               <div class="d-flex justify-content-between">
-                <h5 class="card-title text-primary mb-0 fs-6">Exploring the Daily Dose: . . .</h5>
-                <a href="#" class="text-primary fs-7">Category</a>
-              </div>
-              <div class="d-flex align-items-center mt-2">
-                <span class="text-muted small me-3">Author</span>
-                <span class="text-muted small">a min ago</span>
+                <h5 class="card-title text-primary mb-0 fs-6 text-truncate">
+                  {{ related_activity.title }}
+                </h5>
+                <span class="text-muted small">{{ related_activity.publish|date:"d M Y" }}</span>
               </div>
             </div>
           </div>
-
-          <!-- Card 2 -->
-          <div class="card mb-4" style="max-width: 250px; border-radius: 10px; overflow: hidden;">
-            <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Content Image" />
-            <div class="card-body p-2">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title text-primary mb-0 fs-6">Exploring the Daily Dose: . . .</h5>
-                <a href="#" class="text-primary fs-7">Category</a>
-              </div>
-              <div class="d-flex align-items-center mt-2">
-                <span class="text-muted small me-3">Author</span>
-                <span class="text-muted small">a min ago</span>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </div>

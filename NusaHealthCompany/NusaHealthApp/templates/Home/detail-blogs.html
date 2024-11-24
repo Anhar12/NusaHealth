@@ -1,29 +1,26 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Detail Blogs - Nusa Health Company
+  {{ blog.title }} - Nusa Health Company
 {% endblock %}
 
 {% block content %}
   <div class="ms-5 pt-2">
     <div class="container mt-5">
       <div class="row">
+        <!-- Main Content -->
         <div class="col-lg-8">
-          <h1 class="text-primary fw-bold mb-4">Why Vaccination Matters: Our Hospital’s Commitment to a Healthier Community</h1>
-          <img src="https://via.placeholder.com/750x300" class="img-fluid article-image mb-4" alt="Vaccination" />
+          <h1 class="text-primary fw-bold mb-4">{{ blog.title }}</h1>
+          <img src="{{ blog.image.url }}" class="img-fluid article-image mb-4" alt="{{ blog.title }}" />
           <div class="content text-justify me-5">
-            <p>Vaccination is one of the most powerful tools we have to protect our community from infectious diseases. At Nusa Health, we’re committed to making vaccines accessible and convenient for everyone.</p>
-            <p>Over the past few months, our staff has been hard at work hosting vaccination clinics both within the hospital and in outreach events around the community. These clinics not only protect individuals but also create a safer environment for everyone, especially those who can’t receive vaccines themselves.</p>
-            <p>Our medical team has seen firsthand the impact of vaccines on reducing the spread of diseases, and we’re proud to play a part in keeping our community healthy. We’re grateful to everyone who has come out to get vaccinated and to our incredible staff and volunteers who make these clinics possible.</p>
-            <p>Let's keep up the momentum and continue to protect one another. If you haven’t received your vaccines yet or want more information, reach out to us or visit our next clinic!</p>
+            {{ blog.body|safe }}
           </div>
-          <div class="pagination mt-4">
-            <a href="#" class="btn btn-outline-primary me-2">Previous</a>
-            <a href="#" class="btn btn-primary me-2">1</a>
-            <a href="#" class="btn btn-outline-primary me-2">2</a>
-            <a href="#" class="btn btn-outline-primary">3</a>
-            <a href="#" class="btn btn-outline-primary ms-2">Next</a>
+          
+          <div class="mt-4">
+            <p class="text-secondary small">Published on: {{ blog.publish|date:"d M, Y" }}</p>
+            <p class="text-secondary small">Category: <span class="text-primary">{{ blog.category }}</span></p>
           </div>
+
           <!-- Share this -->
           <div class="text-start mt-4 mb-4">
             <p class="text-primary mb-2">Share this</p>
@@ -33,9 +30,9 @@
           </div>
         </div>
 
-        <!-- Table of Contents -->
+        <!-- Sidebar -->
         <div class="col-lg-4 ms-md-auto table-of-contents">
-          <h4 class="text-primary">Table of Contents</h4>
+          <h4 class="text-primary">Other Blogs</h4>
 
           <!-- Search Box -->
           <div class="search-box">
@@ -44,41 +41,24 @@
               <button class="btn btn-primary" type="submit">Search</button>
             </form>
           </div>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-primary text-decoration-none">Exploring the Daily Dose...</a></li>
-            <li><a href="#" class="text-primary text-decoration-none">How to Make the Most...</a></li>
-            <li><a href="#" class="text-primary text-decoration-none">More Topics...</a></li>
-          </ul>
 
-          <!-- Card 1 -->
+          <!-- Related Blogs -->
+          {% for related_blog in related_blogs %}
           <div class="card mb-4" style="max-width: 250px; border-radius: 10px; overflow: hidden;">
-            <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Content Image" />
+            <a href="{% url 'blog_detail' related_blog.id %}">
+              <img src="{{ related_blog.image.url }}" class="card-img-top" alt="{{ related_blog.title }}" />
+            </a>
             <div class="card-body p-2">
               <div class="d-flex justify-content-between">
-                <h5 class="card-title text-primary mb-0 fs-6">Exploring the Daily Dose: . . .</h5>
-                <a href="#" class="text-primary fs-7">Category</a>
+                <a href="{% url 'blog_detail' related_blog.id %}" class="text-decoration-none">
+                  <h5 class="card-title text-primary mb-0 fs-6 text-truncate">{{ related_blog.title }}</h5>
+                </a>
+                <span class="text-secondary small">{{ related_blog.category }}</span>
               </div>
-              <div class="d-flex align-items-center mt-2">
-                <span class="text-muted small me-3">Author</span>
-                <span class="text-muted small">a min ago</span>
-              </div>
+              <p class="text-muted small">{{ related_blog.publish|date:"d M, Y" }}</p>
             </div>
           </div>
-
-          <!-- Card 2 -->
-          <div class="card mb-4" style="max-width: 250px; border-radius: 10px; overflow: hidden;">
-            <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Content Image" />
-            <div class="card-body p-2">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title text-primary mb-0 fs-6">Exploring the Daily Dose: . . .</h5>
-                <a href="#" class="text-primary fs-7">Category</a>
-              </div>
-              <div class="d-flex align-items-center mt-2">
-                <span class="text-muted small me-3">Author</span>
-                <span class="text-muted small">a min ago</span>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </div>
