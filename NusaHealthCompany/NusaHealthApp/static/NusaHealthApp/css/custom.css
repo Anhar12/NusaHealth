@@ -510,7 +510,6 @@ textarea {
     padding-top: 7rem; /* Or any value you prefer */
 }
 
-
 @media only screen and (max-width: 768px) {
     #sidebar-mcu {
         position: fixed !important;

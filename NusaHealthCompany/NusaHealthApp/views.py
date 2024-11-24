@@ -90,6 +90,15 @@ def Blog(request):
     }
     return render(request, 'Home/blogs.html', context)
 
+def BlogDetail(request):
+    logo_instance = Logo.objects.first()
+
+    context = {
+        'section': 'blogs',
+        'logo': logo_instance,
+    }
+    return render(request, 'Home/detail-blogs.html', context)
+
 def Activity(request):
     logo_instance = Logo.objects.first()
     
@@ -115,6 +124,16 @@ def Activity(request):
     }
     
     return render(request, 'Home/activities.html', context)
+
+def ActivityDetail(request):
+    logo_instance = Logo.objects.first()
+    
+    context = {
+        'section': 'activities',
+        'logo': logo_instance,
+    }
+    
+    return render(request, 'Home/detail-activities.html', context)
 
     
 def Contact(request):
@@ -376,6 +395,26 @@ def ContentManagement(request):
         'location': location
     }
     return render(request, 'Dashboard/content-management.html', context)
+
+@admin_required()
+def LogosManagement(request):
+    logo_instance = Logo.objects.first()
+
+    context = {
+        'section': 'logos-management',
+        'logo': logo_instance,
+    }
+    return render(request, 'Dashboard/logos-management.html', context)
+
+@admin_required()
+def ImageSliderManagement(request):
+    image_slider = ImageSlider.objects.first()
+
+    context = {
+        'section': 'imageSlider-management',
+        'slider': image_slider,
+    }
+    return render(request, 'Dashboard/ImageSlider-management.html', context)
 
 @admin_required()
 def UploadLogo(request):
