@@ -134,7 +134,6 @@ def Activity(request):
     
     return render(request, 'Home/activities.html', context)
 
-<<<<<<< HEAD
 def ActivityDetail(request):
     logo_instance = Logo.objects.first()
     
@@ -145,9 +144,6 @@ def ActivityDetail(request):
     
     return render(request, 'Home/detail-activities.html', context)
 
-    
-=======
->>>>>>> 089a6cc473503165b5e1f5a9a20fab9cc1c5132c
 def Contact(request):
     logo_instance = Logo.objects.first()
     contact = ContactSection.objects.first()
@@ -414,27 +410,6 @@ def ContentManagement(request):
     }
     return render(request, 'Dashboard/content-management.html', context)
 
-@admin_required()
-<<<<<<< HEAD
-def LogosManagement(request):
-    logo_instance = Logo.objects.first()
-
-    context = {
-        'section': 'logos-management',
-        'logo': logo_instance,
-    }
-    return render(request, 'Dashboard/logos-management.html', context)
-
-@admin_required()
-def ImageSliderManagement(request):
-    image_slider = ImageSlider.objects.first()
-
-    context = {
-        'section': 'imageSlider-management',
-        'slider': image_slider,
-    }
-    return render(request, 'Dashboard/ImageSlider-management.html', context)
-=======
 def ContactManagement(request):
     logo_instance = Logo.objects.first()
     contact = ContactSection.objects.first()
@@ -481,7 +456,7 @@ def HomeManagement(request):
         'services': services,
     }
     return render(request, 'Dashboard/home-management.html', context)
->>>>>>> 089a6cc473503165b5e1f5a9a20fab9cc1c5132c
+
 
 @admin_required()
 def UploadLogo(request):
