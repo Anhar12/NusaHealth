@@ -24,14 +24,11 @@ urlpatterns = [
     path('dashboard/activities-management/delete/<int:activity_id>', views.ActivitiesManagementDelete, name='activities-management-delete'),
     
     path('dashboard/content-management', views.ContentManagement, name='content-management'),
-<<<<<<< HEAD
-    path('dashboard/logos-management', views.LogosManagement, name='logos-management'),
-    path('dashboard/imageSlider-management', views.ImageSliderManagement, name='imageSlider-management'),
-=======
+    
     path('dashboard/home-management', views.HomeManagement, name='home-management'),
     path('dashboard/about-management', views.AboutManagement, name='about-management'),
     path('dashboard/contact-management', views.ContactManagement, name='contact-management'),
->>>>>>> 089a6cc473503165b5e1f5a9a20fab9cc1c5132c
+
     path('dashboard/upload-logo', views.UploadLogo, name='upload-logo'),
     path('dashboard/upload-slider', views.UploadSlider, name='upload-slider'),
     path('dashboard/upload-hero', views.UploadHero, name='upload-hero'),
