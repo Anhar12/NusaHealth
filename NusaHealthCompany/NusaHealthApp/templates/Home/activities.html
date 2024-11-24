@@ -22,7 +22,7 @@ Activities - Nusa Health Company
             </div>
             <div class="col-md-6 px-3 py-4">
                 <div class="border-bottom">
-                    <a href="#" class="text-decoration-none">
+                    <a href="{% url 'detail-activities' latest_activity.id %}" class="text-decoration-none">
                         <h4 class="text-primary fw-semibold text-truncate-2" style="height: 60px;">
                             {{ latest_activity.title }}
                         </h4>
@@ -65,13 +65,15 @@ Activities - Nusa Health Company
             {% for activity in activities %}
             <div class="col-md-4 p-2" style="cursor: pointer;">
                 <div class="rounded shadow-btn bg-white overflow-hidden border border-primary">
-                    <img src="{{ activity.image.url }}" class="w-100 m-0 border-bottom border-secondary" style="height: 200px; object-fit: cover;" alt="{{ activity.title }}">
-
+                    <a href="{% url 'detail-activities' activity.id %}">
+                        <img src="{{ activity.image.url }}" class="w-100 m-0 border-bottom border-secondary" style="height: 200px; object-fit: cover;" alt="{{ activity.title }}">
+                    </a>
                     <div class="my-2 mx-3 border-bottom">
-                        <h5 class="fw-semibold text-truncate-1 fs-5" style="height: 25px;">
-                            {{ activity.title }}
-                        </h5>
-
+                        <a href="{% url 'detail-activities' activity.id %}" class="text-decoration-none">
+                            <h5 class="fw-semibold text-truncate-1 fs-5" style="height: 25px;">
+                                {{ activity.title }}
+                            </h5>
+                        </a>
                         <p class="text-secondary fs-small text-truncate-3 text-justify" style="height: 55px;">
                             {{ activity.body }}
                         </p>
