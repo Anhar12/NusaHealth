@@ -56,7 +56,7 @@ def About(request):
     }
     return render(request, 'Home/about.html', context)
 
-def Blog(request):
+# def Blog(request):
     logo_instance = Logo.objects.first()
 
     # Ambil blog terbaru (hanya satu) untuk ditampilkan di bagian latest
@@ -90,6 +90,47 @@ def Blog(request):
         'blogs': page_obj,
         'latest_blog': latest_blog,
         'categories': categories,
+        'query': query,
+        'selected_category': category_filter,
+    }
+    return render(request, 'Home/blogs.html', context)
+
+from django.shortcuts import render
+from django.core.paginator import Paginator
+from django.db.models import Q
+from .models import Blogs, Logo
+
+def Blog(request):
+    logo_instance = Logo.objects.first()
+
+    # Blog terbaru
+    latest_blog = Blogs.objects.filter(status='published').order_by('-publish').first()
+
+    # Semua blog yang dipublikasikan
+    blogs = Blogs.objects.filter(status='published').order_by('-publish')
+
+    # Filter kategori
+    category_filter = request.GET.get('category')
+    valid_categories = [cat[0] for cat in Blogs.CATEGORIES]  # Ambil kategori valid dari model
+    if category_filter and category_filter in valid_categories:
+        blogs = blogs.filter(category__iexact=category_filter)  # case-insensitive filtering
+
+    # Pencarian berdasarkan judul atau isi
+    query = request.GET.get('q')
+    if query:
+        blogs = blogs.filter(Q(title__icontains=query) | Q(body__icontains=query))
+
+    # Paginasi
+    paginator = Paginator(blogs, 6)  # 6 blog per halaman
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'section': 'blogs',
+        'logo': logo_instance,
+        'latest_blog': latest_blog,
+        'blogs': page_obj,
+        'categories': Blogs.CATEGORIES,
         'query': query,
         'selected_category': category_filter,
     }
