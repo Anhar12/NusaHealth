@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 from django.urls import reverse
 
 # Create your models here.
@@ -160,6 +161,17 @@ class Blogs(models.Model):
                             self.publish.strftime('%m'),
                             self.publish.strftime('%d'),
                             self.slug])
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.title)
+            unique_slug = base_slug
+            num = 1
+            while Blogs.objects.filter(slug=unique_slug).exists():
+                unique_slug = f'{base_slug}-{num}'
+                num += 1
+            self.slug = unique_slug
+        super().save(*args, **kwargs)
 
 class Activities(models.Model):
     STATUS_CHOICES = (
@@ -190,6 +202,17 @@ class Activities(models.Model):
                             self.publish.strftime('%m'),
                             self.publish.strftime('%d'),
                             self.slug])
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.title)
+            unique_slug = base_slug
+            num = 1
+            while Blogs.objects.filter(slug=unique_slug).exists():
+                unique_slug = f'{base_slug}-{num}'
+                num += 1
+            self.slug = unique_slug
+        super().save(*args, **kwargs)
 
     
 class Comment(models.Model):

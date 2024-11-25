@@ -1,2 +1,4 @@
 NusaHealthCompany/db.sqlite3
+NusaHealthCompany/staticfiles/
+NusaHealthCompany/media/
 **/__pycache__/

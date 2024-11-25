@@ -5,35 +5,32 @@
 {% endblock %}
 
 {% block content %}
-  <div class="ms-5 pt-2">
-    <div class="container mt-5">
+  <div class="pt-2">
+    <div class="container d-flex gap-3 my-5">
+      <div>
+        <a href="{% url 'activities' %}" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center fs-5" style="width: 40px !important; height: 40px !important;">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+      </div>
       <div class="row">
         <div class="col-lg-8">
           <!-- Activity Title -->
-          <h1 class="text-primary fw-bold mb-4">{{ activity.title }}</h1>
+          <h2 class="fw-bold mb-4">{{ activity.title }}</h2>
           
           <!-- Activity Image -->
-          <img src="{{ activity.image.url }}" class="img-fluid article-image mb-4" alt="{{ activity.title }}" />
+          <img src="{{ activity.image.url }}" class="img-fluid article-image mb-4 rounded border" alt="{{ activity.title }}" />
 
           <!-- Activity Content -->
-          <div class="content text-justify me-5">
-            <p>{{ activity.body }}</p>
+          <div class="content text-justify">
+            <p>{{ activity.body|safe }}</p>
           </div>
 
-          <!-- Pagination (Optional if applicable) -->
-          {% if previous_activity or next_activity %}
-          <div class="pagination mt-4">
-            {% if previous_activity %}
-              <a href="{% url 'detail-activities' previous_activity.id %}" class="btn btn-outline-primary me-2">Previous</a>
-            {% endif %}
-            {% if next_activity %}
-              <a href="{% url 'detail-activities' next_activity.id %}" class="btn btn-outline-primary ms-2">Next</a>
-            {% endif %}
+          <div class="mt-4">
+            <p class="text-secondary">Published on: {{ activity.publish|date:"d M, Y" }}</p>
           </div>
-          {% endif %}
 
           <!-- Share this -->
-          <div class="text-start mt-4 mb-4">
+          <!-- <div class="text-start mt-4 mb-4">
             <p class="text-primary mb-2">Share this</p>
             <a href="https://facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="text-primary me-3">
               <i class="fab fa-facebook-f"></i>
@@ -44,52 +41,35 @@
             <a href="https://www.linkedin.com/shareArticle?url={{ request.build_absolute_uri }}&title={{ activity.title }}" target="_blank" class="text-primary">
               <i class="fab fa-linkedin-in"></i>
             </a>
-          </div>
+          </div> -->
         </div>
 
         <!-- Related Activities -->
         <div class="col-lg-4 ms-md-auto table-of-contents">
-          <h4 class="text-primary">Related Activities</h4>
+          <h4 class="text-primary fw-semibold">Other Activities</h4>
 
-          <!-- Search Box -->
-          <div class="search-box">
-            <form class="d-flex mb-2" method="GET" action="{% url 'activities' %}">
-              <input class="form-control me-2 w-auto" type="search" name="q" placeholder="Search activities..." value="{{ query|default:'' }}" aria-label="Search" />
-              <button class="btn btn-primary" type="submit">Search</button>
-            </form>
-          </div>
-
-          <!-- Related Activities List -->
-          <ul class="list-unstyled">
+          <div class="d-flex flex-column gap-4">
             {% for related_activity in related_activities %}
-            <li>
-              <a href="{% url 'detail-activities' related_activity.id %}" class="text-primary text-decoration-none">
-                {{ related_activity.title }}
-              </a>
-            </li>
-            {% endfor %}
-          </ul>
-
-          <!-- Example Card for Related Activities -->
-          {% for related_activity in related_activities %}
-          <div class="card mb-4" style="max-width: 250px; border-radius: 10px; overflow: hidden;">
-            <a href="{% url 'detail-activities' related_activity.id %}">
-              <img src="{{ related_activity.image.url }}" class="card-img-top" alt="{{ related_activity.title }}" />
-            </a>
-            <div class="card-body p-2">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title text-primary mb-0 fs-6 text-truncate">
-                  {{ related_activity.title }}
-                </h5>
-                <span class="text-muted small">{{ related_activity.publish|date:"d M Y" }}</span>
+              <div class="rounded shadow-btn bg-white overflow-hidden border" style="border-radius: 10px; overflow: hidden;">
+                <a href="{% url 'detail-activities' related_activity.slug %}">
+                  <img src="{{ related_activity.image.url }}" class="w-100" style="object-fit: cover; height: 40vh;" alt="{{ related_activity.title }}" />
+                </a>
+                <div class="card-body p-2">
+                  <div class="mb-2">
+                    <a href="{% url 'detail-activities' related_activity.slug %}" class="text-decoration-none text-dark text-title">
+                      <h5 class="mb-0 fs-6 text-truncate-1">{{ related_activity.title }}</h5>
+                    </a>
+                  </div>
+                  <div class="d-flex justify-content-end align-items-center">
+                    <p class="text-muted small">{{ related_activity.publish|date:"d M, Y" }}</p>
+                  </div>
+                </div>
               </div>
-            </div>
+            {% endfor %}
           </div>
-          {% endfor %}
         </div>
       </div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}

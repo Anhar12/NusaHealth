@@ -132,7 +132,7 @@
                         $('#loading').addClass('d-none');
                         $('.overlay').addClass('d-none');
                         if (response.is_superuser) {
-                            window.location.href = "{% url 'dashboard' %}";
+                            window.location.href = "{% url 'blogs-management' %}";
                         } else {
                             $('#error-message').text(response.error).addClass('d-block').removeClass('d-none');
                         }

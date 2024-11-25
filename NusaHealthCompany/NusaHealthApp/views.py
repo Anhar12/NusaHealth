@@ -57,43 +57,43 @@ def About(request):
     return render(request, 'Home/about.html', context)
 
 # def Blog(request):
-    logo_instance = Logo.objects.first()
+#     logo_instance = Logo.objects.first()
 
-    # Ambil blog terbaru (hanya satu) untuk ditampilkan di bagian latest
-    latest_blog = Blogs.objects.filter(status='published').order_by('-publish').first()
+#     # Ambil blog terbaru (hanya satu) untuk ditampilkan di bagian latest
+#     latest_blog = Blogs.objects.filter(status='published').order_by('-publish').first()
 
-    # Ambil semua blog yang sudah dipublikasikan, urutkan berdasarkan tanggal terbaru
-    blogs = Blogs.objects.filter(status='published').order_by('-publish')
+#     # Ambil semua blog yang sudah dipublikasikan, urutkan berdasarkan tanggal terbaru
+#     blogs = Blogs.objects.filter(status='published').order_by('-publish')
 
-    # Ambil kategori yang dipilih dari URL
-    category_filter = request.GET.get('category')
+#     # Ambil kategori yang dipilih dari URL
+#     category_filter = request.GET.get('category')
 
-    if category_filter:
-        # Pastikan kategori yang dipilih adalah valid
-        blogs = blogs.filter(category=category_filter)
+#     if category_filter:
+#         # Pastikan kategori yang dipilih adalah valid
+#         blogs = blogs.filter(category=category_filter)
 
-    query = request.GET.get('q')   # Mendapatkan query dari form pencarian
+#     query = request.GET.get('q')   # Mendapatkan query dari form pencarian
     
-    if query:
-        # Jika ada query, filter blog berdasarkan judul
-        blogs = blogs.filter(title__icontains=query)
+#     if query:
+#         # Jika ada query, filter blog berdasarkan judul
+#         blogs = blogs.filter(title__icontains=query)
 
-    categories = Blogs.CATEGORIES  # Ambil kategori dari model
+#     categories = Blogs.CATEGORIES  # Ambil kategori dari model
 
-    paginator = Paginator(blogs, 6)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+#     paginator = Paginator(blogs, 6)
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
     
-    context = {
-        'section': 'blogs',
-        'logo': logo_instance,
-        'blogs': page_obj,
-        'latest_blog': latest_blog,
-        'categories': categories,
-        'query': query,
-        'selected_category': category_filter,
-    }
-    return render(request, 'Home/blogs.html', context)
+#     context = {
+#         'section': 'blogs',
+#         'logo': logo_instance,
+#         'blogs': page_obj,
+#         'latest_blog': latest_blog,
+#         'categories': categories,
+#         'query': query,
+#         'selected_category': category_filter,
+#     }
+#     return render(request, 'Home/blogs.html', context)
 
 from django.shortcuts import render
 from django.core.paginator import Paginator
@@ -145,17 +145,19 @@ def Blog(request):
 #     }
 #     return render(request, 'Home/detail-blogs.html', context)
 
-def BlogDetail(request, blog_id):
+def BlogDetail(request, slug):
     # Fetch the logo instance
     logo_instance = Logo.objects.first()
     
-    # Retrieve the specific blog using the provided blog_id
-    blog = get_object_or_404(Blogs, id=blog_id, status='published')
+    # Retrieve the specific blog using the provided slug
+    blog = get_object_or_404(Blogs, slug=slug, status='published')
+    related_blogs = Blogs.objects.filter(status='published').exclude(slug=slug)[:3]
 
     context = {
         'section': 'blogs',
         'logo': logo_instance,
         'blog': blog,  # Pass the blog object to the template
+        'related_blogs': related_blogs,  # Pass related blogs to the template
     }
     return render(request, 'Home/detail-blogs.html', context)
 
@@ -199,10 +201,10 @@ def Activity(request):
     
 #     return render(request, 'Home/detail-activities.html', context)
 
-def ActivityDetail(request, activity_id):
+def ActivityDetail(request, slug):
     logo_instance = Logo.objects.first()
-    activity = get_object_or_404(Activities, id=activity_id)
-    related_activities = Activities.objects.filter(status='published').exclude(id=activity_id)[:3]
+    activity = get_object_or_404(Activities, slug=slug)
+    related_activities = Activities.objects.filter(status='published').exclude(slug=slug)[:3]
     
     context = {
         'section': 'activities',

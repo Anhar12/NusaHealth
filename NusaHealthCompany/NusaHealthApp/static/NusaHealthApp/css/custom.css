@@ -50,6 +50,13 @@
     background-color: #2FCCFF !important;
     color: #ffffff !important;    
 } */
+.text-title {
+    transition: color 0.2s ease-in-out;
+}
+
+.text-title:hover {
+    color: #00C1FF !important;
+}
 
 .text-warning {
     color: #FCB316 !important;
@@ -413,7 +420,7 @@ footer a.nav-link:hover {
 } */
 .swiper-container {
     width: 100%;
-    height: 480px;
+    height: 88vh;
     position: relative;
 }
 
@@ -442,13 +449,12 @@ footer a.nav-link:hover {
 }
 
 .swiper-pagination {
-    position: relative;
-    margin-top: 10px;
+    bottom: 10px;
     text-align: center;
 }
 
 .swiper-pagination-bullet-active {
-    background: #2FCCFF;
+    background: #fff;
 }
 
 .shadow-login{

@@ -22,7 +22,7 @@ Activities - Nusa Health Company
             </div>
             <div class="col-md-6 px-3 py-4">
                 <div class="border-bottom">
-                    <a href="{% url 'detail-activities' latest_activity.id %}" class="text-decoration-none">
+                    <a href="{% url 'detail-activities' latest_activity.slug %}" class="text-decoration-none">
                         <h4 class="text-primary fw-semibold text-truncate-2" style="height: 60px;">
                             {{ latest_activity.title }}
                         </h4>
@@ -64,13 +64,13 @@ Activities - Nusa Health Company
         <div class="row w-100 mt-4">
             {% for activity in activities %}
             <div class="col-md-4 p-2" style="cursor: pointer;">
-                <div class="rounded shadow-btn bg-white overflow-hidden border border-primary">
-                    <a href="{% url 'detail-activities' activity.id %}">
+                <div class="rounded shadow-btn bg-white overflow-hidden border">
+                    <a href="{% url 'detail-activities' activity.slug %}">
                         <img src="{{ activity.image.url }}" class="w-100 m-0 border-bottom border-secondary" style="height: 200px; object-fit: cover;" alt="{{ activity.title }}">
                     </a>
                     <div class="my-2 mx-3 border-bottom">
-                        <a href="{% url 'detail-activities' activity.id %}" class="text-decoration-none">
-                            <h5 class="fw-semibold text-truncate-1 fs-5" style="height: 25px;">
+                        <a href="{% url 'detail-activities' activity.slug %}" class="text-decoration-none text-dark text-title">
+                            <h5 class="fw-semibold text-truncate-2 fs-5" style="height: 50px;">
                                 {{ activity.title }}
                             </h5>
                         </a>
@@ -90,8 +90,8 @@ Activities - Nusa Health Company
             </div>
             {% endfor %}
         </div>
-        <div class="pagination mt-3">
-            <span class="d-flex gap-2 align-items-center">
+        <div class="pagination mt-4 w-100 d-flex justify-content-center align-items-center">
+            <span class="d-flex gap-2">
                 {% if activities.has_previous %}
                     <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page=1"><i class="fa-solid fa-angles-left"></i></a>
                     <a class="text-primary fs-3 fw-bold me-2 text-decoration-none" href="?page={{ activities.previous_page_number }}"><i class="fa-solid fa-angle-left"></i></a>
@@ -115,17 +115,7 @@ Activities - Nusa Health Company
 
 <script>
     $(document).ready(function () {
-        $("#show-all-btn").on("click", function () {
-            $(".category.d-none").removeClass("d-none");
-            $(this).hide();
-            $("#show-less-btn").removeClass("d-none");
-        });
-
-        $("#show-less-btn").on("click", function () {
-            $(".category").slice(4).addClass("d-none");
-            $(this).addClass("d-none");
-            $("#show-all-btn").show();
-        });
+        
     });
 </script>
 
