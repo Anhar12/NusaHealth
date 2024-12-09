@@ -145,19 +145,25 @@ def Blog(request):
 #     }
 #     return render(request, 'Home/detail-blogs.html', context)
 
-def BlogDetail(request, slug):
+def BlogDetail(request, blog_id):
     # Fetch the logo instance
     logo_instance = Logo.objects.first()
     
-    # Retrieve the specific blog using the provided slug
-    blog = get_object_or_404(Blogs, slug=slug, status='published')
-    related_blogs = Blogs.objects.filter(status='published').exclude(slug=slug)[:3]
+    # Retrieve the specific blog using the provided blog_id
+    blog = get_object_or_404(Blogs, id=blog_id, status='published')
+    related_blogs = Blogs.objects.filter(status='published').exclude(id=blog_id)[:3]
+    
+    if blog and blog.body:
+        body_html = markdown(blog.body)
+    else:
+        body_html = ""
 
     context = {
         'section': 'blogs',
         'logo': logo_instance,
-        'blog': blog,  # Pass the blog object to the template
-        'related_blogs': related_blogs,  # Pass related blogs to the template
+        'body_html': body_html,
+        'blog': blog,
+        'related_blogs': related_blogs,
     }
     return render(request, 'Home/detail-blogs.html', context)
 
@@ -201,15 +207,21 @@ def Activity(request):
     
 #     return render(request, 'Home/detail-activities.html', context)
 
-def ActivityDetail(request, slug):
+def ActivityDetail(request, activity_id):
     logo_instance = Logo.objects.first()
-    activity = get_object_or_404(Activities, slug=slug)
-    related_activities = Activities.objects.filter(status='published').exclude(slug=slug)[:3]
+    activity = get_object_or_404(Activities, id=activity_id)
+    related_activities = Activities.objects.filter(status='published').exclude(id=activity_id)[:3]
+    
+    if activity and activity.body:
+        body_html = markdown(activity.body)
+    else:
+        body_html = ""
     
     context = {
         'section': 'activities',
         'logo': logo_instance,
         'activity': activity,
+        'body_html': body_html,
         'related_activities': related_activities,
     }
     
