@@ -145,13 +145,13 @@ def Blog(request):
 #     }
 #     return render(request, 'Home/detail-blogs.html', context)
 
-def BlogDetail(request, blog_id):
+def BlogDetail(request, slug):
     # Fetch the logo instance
     logo_instance = Logo.objects.first()
     
-    # Retrieve the specific blog using the provided blog_id
-    blog = get_object_or_404(Blogs, id=blog_id, status='published')
-    related_blogs = Blogs.objects.filter(status='published').exclude(id=blog_id)[:3]
+    # Retrieve the specific blog using the provided slug
+    blog = get_object_or_404(Blogs, slug=slug, status='published')
+    related_blogs = Blogs.objects.filter(status='published').exclude(slug=slug)[:3]
     
     if blog and blog.body:
         body_html = markdown(blog.body)
@@ -207,10 +207,10 @@ def Activity(request):
     
 #     return render(request, 'Home/detail-activities.html', context)
 
-def ActivityDetail(request, activity_id):
+def ActivityDetail(request, slug):
     logo_instance = Logo.objects.first()
-    activity = get_object_or_404(Activities, id=activity_id)
-    related_activities = Activities.objects.filter(status='published').exclude(id=activity_id)[:3]
+    activity = get_object_or_404(Activities, slug=slug)
+    related_activities = Activities.objects.filter(status='published').exclude(slug=slug)[:3]
     
     if activity and activity.body:
         body_html = markdown(activity.body)
